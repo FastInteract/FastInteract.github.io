@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer">
+<meta name="description" content="Complete HOI-QA50 protocol: 50 questions, judging prompts, frame sampling, scoring, critical-failure caps, and structured response formats.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'self'; base-uri 'none'; form-action 'none'">
+<title>FastInteract — VLM-QA Protocol</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"><link rel="stylesheet" href="../assets/protocol.css?v=1">
+</head><body class="protocol-page">
+<a href="#protocol-content" class="skip-link">Skip to the protocol</a>
+<header class="site-header"><div class="shell header-inner"><a class="brand" href="../dataset/"><span class="brand-mark" aria-hidden="true">FI</span><span class="brand-copy"><strong>FastInteract</strong><span>Supplementary material</span></span></a><div class="header-tools"><nav class="page-nav" aria-label="Supplementary pages"><a href="../dataset/">Dataset</a><a href="../user-study/">Qualitative results</a><a href="../failure-cases/">Failure cases</a><a href="./" aria-current="page">VLM-QA protocol</a></nav><span class="anonymous-label"><span aria-hidden="true"></span>Anonymous submission</span></div></div></header>
+<main class="shell">
+<div class="protocol-heading"><div><h1>VLM-QA Evaluation Protocol</h1><p>HOI-QA50-Strict-Proxy · Question bank, prompts, sampling, and scoring</p></div><a class="protocol-download" href="../downloads/vlm-qa/vlm-qa-protocol.zip" download>Download full protocol ↓</a></div>
+<div class="protocol-layout">
+<aside class="protocol-index"><nav aria-label="Protocol sections"><a href="#overview">Overview</a><a href="#scoring">Scoring &amp; failure caps</a><a href="#sampling">Frame sampling &amp; settings</a><a href="#prompts">Exact prompts &amp; schema</a><a href="#question-bank">All 50 questions</a><a href="#reproduction">Protocol downloads</a></nav></aside>
+<div id="protocol-content" class="protocol-content">
+<section id="overview"><h2>1. Overview</h2>
+<p>This release documents the independently specified <strong>HOI-QA50 strict proxy</strong> used for the reported evaluation. It evaluates interaction mechanics through 50 defect questions across four categories. All scores are on a 0–100 scale; higher is better.</p>
+<div class="table-wrap"><table><caption class="sr-only">The four evaluation categories, question counts and score weights</caption><thead><tr><th>Category</th><th>Question IDs</th><th class="numeric">Count</th><th class="numeric">Weight</th></tr></thead><tbody><tr><th scope="row">C · Action correctness and completion</th><td>C01–C10</td><td class="numeric">10</td><td class="numeric">25%</td></tr><tr><th scope="row">S · Contact, support, and spatial relations</th><td>S01–S16</td><td class="numeric">16</td><td class="numeric">35%</td></tr><tr><th scope="row">M · Hand-object motion synchronization and timing</th><td>M01–M12</td><td class="numeric">12</td><td class="numeric">25%</td></tr><tr><th scope="row">A · Hand, limb, and object structure</th><td>A01–A12</td><td class="numeric">12</td><td class="numeric">15%</td></tr></tbody></table></div>
+<p>The 50 questions define the metric’s question bank. Applicability is assessed separately for each requested interaction and then shared across the methods being compared.</p>
+<p>For each case, applicability is determined from the requested action, object label, and optional product reference <strong>before generated outputs are inspected</strong>. The same frozen profile is used across methods. Each applicable question is judged independently. Motion synchronization refers to hand–object motion coupling. Aesthetics, identity/reference similarity, background consistency, and audio quality are outside this metric's scope.</p>
+</section>
+<section id="scoring"><h2>2. Scoring and critical-failure rules</h2>
+<h3>Answer states</h3>
+<div class="table-wrap"><table><thead><tr><th>State</th><th>Meaning</th><th>Credit</th></tr></thead><tbody><tr><th scope="row">CLEAN</th><td>The applicability condition is true and sufficient visible evidence confirms that the FAIL condition does not occur.</td><td>1</td></tr><tr><th scope="row">DEFECT</th><td>The applicability condition is true and visible evidence satisfies the FAIL condition.</td><td>0</td></tr><tr><th scope="row">UNCERTAIN</th><td>The applicability condition is true, but occlusion, resolution, sampling, or conflicting evidence prevents a reliable decision; this is not scored as a pass.</td><td>0</td></tr><tr><th scope="row">NOT_APPLICABLE</th><td>The applicability condition is false; exclude this question from the denominator.</td><td>Excluded</td></tr></tbody></table></div>
+<p>Generated blur, cropping, occlusion, missing hands, or action failure cannot retroactively make an applicable question N/A. If relevant evidence is insufficient, the judge returns UNCERTAIN, which receives zero credit. NOT_APPLICABLE is assigned by the frozen profile and is forbidden as a response to an applicable judging request.</p>
+<h3>Per-video aggregation</h3>
+<div class="formula"><div>R<sub>ik</sub> = 100 × CLEAN<sub>ik</sub> / (CLEAN<sub>ik</sub> + DEFECT<sub>ik</sub> + UNCERTAIN<sub>ik</sub>)</div><div>F<sub>ik</sub> = min(R<sub>ik</sub>, every triggered category cap)</div><div>H<sub>i</sub> = 1 / Σ<sub>k</sub> (w̃<sub>k</sub> / F<sub>ik</sub>)</div><div>Q<sub>i</sub> = min(H<sub>i</sub>, every triggered overall cap)</div><div>Dataset score = mean<sub>i</sub>(Q<sub>i</sub>)</div></div>
+<p>If every question on a category is N/A, that category is excluded and its weight is redistributed proportionally over the remaining categories (w̃). Any zero-valued valid category yields an overall score of zero. The implementation returns zero when no categories are valid. Dataset category scores are mean<sub>i</sub>(F<sub>ik</sub>); substituting category means into the harmonic mean does not reproduce the dataset overall score.</p>
+<h3>Seven critical-failure caps</h3>
+<p>For each row, <strong>any listed question judged DEFECT</strong> triggers the rule. Multiple triggered caps are combined by taking the strictest bound.</p>
+<div class="table-wrap"><table class="caps-table"><thead><tr><th>Failure type</th><th>Trigger question IDs</th><th>Category cap</th><th class="numeric">Overall cap</th></tr></thead><tbody><tr><th scope="row">Wrong or missing primary action</th><td>C01, C02, C03</td><td>C ≤ 0</td><td class="numeric">35</td></tr><tr><th scope="row">Missing required final state</th><td>C04, C10</td><td>C ≤ 25</td><td class="numeric">50</td></tr><tr><th scope="row">Visible contact gap</th><td>S02</td><td>S ≤ 50</td><td class="numeric">60</td></tr><tr><th scope="row">Detached or floating object</th><td>S01, S03, S04, S05, S10, S12, S16</td><td>S ≤ 25</td><td class="numeric">40</td></tr><tr><th scope="row">Penetration or fusion</th><td>S06, S07, S08</td><td>S ≤ 20</td><td class="numeric">45</td></tr><tr><th scope="row">Gross motion desynchronization</th><td>M01, M02, M03, M04, M07, M10, M12</td><td>M ≤ 20</td><td class="numeric">45</td></tr><tr><th scope="row">Catastrophic structural failure</th><td>A04, A05, A06, A07, A08, A09, A10</td><td>A ≤ 20</td><td class="numeric">50</td></tr></tbody></table></div>
+<p>The exact failure thresholds are the question-specific <strong>FAIL conditions</strong> in the question bank and the caps above. They are not calibrated pixel-distance, physical-distance, or fixed-duration cutoffs. For S02, at least one clear hand–object air gap while contact is required triggers a defect. Brief but clear critical failures are not ignored. A C-category cap of zero already forces the harmonic score to zero, regardless of its accompanying overall cap.</p>
+</section>
+<section id="sampling"><h2>3. Frame sampling and judge settings</h2>
+<h3>Two visual input channels</h3>
+<ol><li><strong>Full-video channel.</strong> The complete generated video is passed to the local multimodal endpoint with <code>fps=16.0</code> and <code>do_sample_frames=true</code>. This is the requested processor sampling rate; the saved records do not expose every frame ultimately retained inside the model processor.</li><li><strong>Explicit audit-frame channel.</strong> ffprobe provides source frame count N and FPS f. Seventeen frames, including both endpoints, are selected with <code>round(j × (N − 1) / 16)</code> for j = 0,…,16, using Python's rounding behavior. Their timestamps are frame_index / f. Frames are labeled F01–F17 and timestamped using ffmpeg.</li></ol>
+<p>The overview has 5 columns with 192-pixel-wide tiles. Contact and structure questions (S/A) additionally receive four horizontal strips from these same 17 frames: <strong>5 + 5 + 5 + 2</strong> frames, each resized to 384 pixels wide, using JPEG qscale 2. Action and motion questions (C/M) receive the full video and overview. Optional product references supply identity/part context. The strips are full-frame arrangements, not automatically detected hand–object crops.</p>
+<details class="protocol-detail"><summary>Exact 17-frame example: 80 frames, 25 FPS, 3.2 seconds</summary><div class="table-wrap"><table><thead><tr><th>Frame ID</th><th class="numeric">Source index</th><th class="numeric">Time (s)</th></tr></thead><tbody><tr><th scope="row">F01</th><td class="numeric">0</td><td class="numeric">0.000</td></tr><tr><th scope="row">F02</th><td class="numeric">5</td><td class="numeric">0.200</td></tr><tr><th scope="row">F03</th><td class="numeric">10</td><td class="numeric">0.400</td></tr><tr><th scope="row">F04</th><td class="numeric">15</td><td class="numeric">0.600</td></tr><tr><th scope="row">F05</th><td class="numeric">20</td><td class="numeric">0.800</td></tr><tr><th scope="row">F06</th><td class="numeric">25</td><td class="numeric">1.000</td></tr><tr><th scope="row">F07</th><td class="numeric">30</td><td class="numeric">1.200</td></tr><tr><th scope="row">F08</th><td class="numeric">35</td><td class="numeric">1.400</td></tr><tr><th scope="row">F09</th><td class="numeric">40</td><td class="numeric">1.600</td></tr><tr><th scope="row">F10</th><td class="numeric">44</td><td class="numeric">1.760</td></tr><tr><th scope="row">F11</th><td class="numeric">49</td><td class="numeric">1.960</td></tr><tr><th scope="row">F12</th><td class="numeric">54</td><td class="numeric">2.160</td></tr><tr><th scope="row">F13</th><td class="numeric">59</td><td class="numeric">2.360</td></tr><tr><th scope="row">F14</th><td class="numeric">64</td><td class="numeric">2.560</td></tr><tr><th scope="row">F15</th><td class="numeric">69</td><td class="numeric">2.760</td></tr><tr><th scope="row">F16</th><td class="numeric">74</td><td class="numeric">2.960</td></tr><tr><th scope="row">F17</th><td class="numeric">79</td><td class="numeric">3.160</td></tr></tbody></table></div></details>
+<p>Finite sampling can miss brief defects; the full-video channel and UNCERTAIN rule do not guarantee their elimination.</p>
+<h3>Recorded judge configuration</h3>
+<div class="table-wrap"><table><thead><tr><th>Setting</th><th>Recorded value</th></tr></thead><tbody><tr><th scope="row">Judge / backend</th><td>Qwen3.8-27B / qwen-local</td></tr><tr><th scope="row">Requested full-video sampling</th><td>16 FPS; do_sample_frames=true</td></tr><tr><th scope="row">Temperature / top-p / top-k</th><td>0.7 / 0.8 / 20</td></tr><tr><th scope="row">min-p</th><td>0.0</td></tr><tr><th scope="row">Presence / repetition penalty</th><td>1.5 / 1.0</td></tr><tr><th scope="row">Seed</th><td>0</td></tr><tr><th scope="row">enable_thinking / preserve_thinking</th><td>false / false</td></tr><tr><th scope="row">Maximum output tokens</th><td>8192</td></tr><tr><th scope="row">Backend retries</th><td>Up to 3 retries beyond the initial request</td></tr><tr><th scope="row">Evidence-validation retries</th><td>Up to 2 corrections beyond the initial judgment</td></tr><tr><th scope="row">JSON mode</th><td>auto</td></tr></tbody></table></div>
+<p>Backend retries handle request/decoding failures. Evidence-validation retries handle malformed question IDs, fields, states, or evidence. JSON mode <code>auto</code> can fall back from enforced schema to prompt-constrained JSON. Valid judgments are not repeatedly sampled for majority voting or favorable selection; a valid UNCERTAIN remains zero credit.</p>
+</section>
+<section id="prompts"><h2>4. Exact prompts and response schema</h2>
+<p>The exact bilingual judging request, pre-video profile prompt, and structured response formats are included in the documentation download. Each applicable question receives a separate judging call containing the request, object label, frozen action profile, applicability rationale, exact question and FAIL condition, critical flag, and fixed frame/time mapping.</p>
+<details class="protocol-detail" open><summary>Judging system prompt — exact text</summary><pre>You are a strict, evidence-first judge of one atomic human-object-interaction defect question.
+The question&#x27;s semantic applicability was frozen before the generated video was viewed. Therefore NOT_APPLICABLE is forbidden in this request.
+
+Inspect the complete video in temporal order, the timestamped overview, and every supplied high-detail frame strip. The target-object reference image is identity/part context only and is never evidence that generated contact or motion is correct.
+
+State rules:
+- DEFECT: visible generated-video evidence satisfies the supplied FAIL condition.
+- CLEAN: positive inspection of the relevant phase establishes that the FAIL condition does not occur. Mere presence of a person/object, intended action, proximity, or an unverified tiny image is not enough.
+- UNCERTAIN: the question is applicable, but crop, blur, occlusion, sampling, or conflicting evidence prevents a reliable decision. Uncertainty receives zero credit and must not be converted to CLEAN.
+
+For hand-object contact, CLEAN requires inspecting actual boundaries: nearby is not contact, and a visible air gap is a defect when contact/support is required. For temporal questions, inspect motion rather than inferring it from a single frame. Cite real timestamps and F01-F17 frame IDs. Reasons must describe visible pixels/motion, not restate the prompt. Return exactly one judgment for the supplied QID.</pre></details>
+<details class="protocol-detail"><summary>Pre-video applicability system prompt — exact text</summary><pre>You create a PRE-VIDEO action and applicability profile for strict human-object-interaction evaluation.
+Use only the requested text, object label, and optional target-object reference image. You must not inspect, anticipate, or adapt to any generated video.
+
+Action rules:
+- Preserve the most specific requested action verb and its defining event. Never replace applying, brushing, curling, spraying, pouring, opening, pressing, wearing, or another functional action with generic holding/displaying merely because the tool must be held.
+- Record a concrete, visually judgeable functional relation when one is needed: e.g. brush bristles contact/move across the face; hair enters or wraps around a curling wand&#x27;s working region.
+- A singular target object normally means expected_object_count=1. Do not infer two objects merely because two hands are visible in a reference.
+
+Applicability rules:
+- Decide semantic applicability before any generated output exists. Set applicable=false only when the requested action makes the question genuinely irrelevant.
+- Do not use future crop, blur, occlusion, missing hands, or a bad generated trajectory to make a question inapplicable. If a semantically relevant property later cannot be observed, the video judge must answer UNCERTAIN.
+- A question that detects an unexpected contact break, unsupported release, disappearance, or duplication remains applicable whenever that failure could violate the requested action, even if the request does not ask for the failure event.
+- C02 is always applicable. Questions about the named target and its disappearance are applicable whenever a target object is specified.
+Return exactly one applicability decision for every supplied QID, in QID order.</pre></details>
+<details class="protocol-detail"><summary>Pre-video profile user prompt — complete example</summary><pre>SYSTEM
+You create a PRE-VIDEO action and applicability profile for strict human-object-interaction evaluation.
+Use only the requested text, object label, and optional target-object reference image. You must not inspect, anticipate, or adapt to any generated video.
+
+Action rules:
+- Preserve the most specific requested action verb and its defining event. Never replace applying, brushing, curling, spraying, pouring, opening, pressing, wearing, or another functional action with generic holding/displaying merely because the tool must be held.
+- Record a concrete, visually judgeable functional relation when one is needed: e.g. brush bristles contact/move across the face; hair enters or wraps around a curling wand&#x27;s working region.
+- A singular target object normally means expected_object_count=1. Do not infer two objects merely because two hands are visible in a reference.
+
+Applicability rules:
+- Decide semantic applicability before any generated output exists. Set applicable=false only when the requested action makes the question genuinely irrelevant.
+- Do not use future crop, blur, occlusion, missing hands, or a bad generated trajectory to make a question inapplicable. If a semantically relevant property later cannot be observed, the video judge must answer UNCERTAIN.
+- A question that detects an unexpected contact break, unsupported release, disappearance, or duplication remains applicable whenever that failure could violate the requested action, even if the request does not ask for the failure event.
+- C02 is always applicable. Questions about the named target and its disappearance are applicable whenever a target object is specified.
+Return exactly one applicability decision for every supplied QID, in QID order.
+
+USER
+Create a frozen action/applicability profile for this requested video.
+
+Object label: bottle
+Requested prompt:
+The young woman with light brown hair pulled back stands in a brightly lit room with white walls, holding a small, light green dropper bottle labeled HOIVG-Bench. The product is a small-size bottle, compact enough to be comfortably held in one hand. She gestures expressively with her hands while demonstrating and speaking directly to the camera, showing how to use the bottle and engaging the viewer with her presentation.
+
+For each question below, decide applicability from the request only. The defect question itself is supplied so that a forbidden unexpected event is not mistakenly declared irrelevant.
+
+C01 [C] Does the person perform the primary interaction on the wrong object?
+  Applicability code: target_object_specified
+  Pre-video condition: The action specification or conditioning input identifies a target object.
+C02 [C] Does the required primary interaction action fail to start at all?
+  Applicability code: always
+  Pre-video condition: Every video with a target HOI action.
+C03 [C] Does the person only approach or pose without reaching the action&#x27;s defining interaction event?
+  Applicability code: defining_event_available
+  Pre-video condition: The action has a defining event such as grasping, wearing, opening, lifting, or placing.
+C04 [C] Does the object fail to reach the final state required by the action specification?
+  Applicability code: final_state_specified
+  Pre-video condition: The action specification defines an observable final state.
+C05 [C] Is the body part performing the primary action inconsistent with the action specification?
+  Applicability code: body_part_specified
+  Pre-video condition: The action explicitly or inherently requires a particular body part.
+C06 [C] Is the left or right hand used for the action inconsistent with the action specification?
+  Applicability code: handedness_specified
+  Pre-video condition: The action specification explicitly states left or right hand.
+C07 [C] Is the number of hands participating in the primary action inconsistent with the action specification?
+  Applicability code: hand_count_specified
+  Pre-video condition: The action explicitly or inherently requires one hand or two hands.
+C08 [C] Do the required sub-actions occur in the wrong order?
+  Applicability code: ordered_multi_step_action
+  Pre-video condition: The action contains two or more sub-actions with a required order.
+C09 [C] Is the object&#x27;s motion direction opposite to the direction specified by the action?
+  Applicability code: direction_specified
+  Pre-video condition: The action specifies a direction such as up, down, left, right, clockwise, or counterclockwise.
+C10 [C] Is a required sustained action state lost before the specified phase ends?
+  Applicability code: sustained_state_required
+  Pre-video condition: The action requires holding, wearing, supporting, or maintaining an object state for a period.
+S01 [S] During a phase that requires contact, does the specified body part never contact the target object?
+  Applicability code: contact_required
+  Pre-video condition: The action contains a phase that requires body-object contact.
+S02 [S] While contact must be maintained, is there a clear air gap between the hand and the object surface?
+  Applicability code: sustained_hand_contact
+  Pre-video condition: The hand must remain in contact during a key phase and the contact region is visible.
+S03 [S] When hand or body support is required, does the object float without any visible support?
+  Applicability code: gravity_support_required
+  Pre-video condition: The object should not self-float and the phase requires a hand, body part, or visible surface to oppose gravity.
+S04 [S] Does the object translate or rotate as if controlled by the hand while clearly detached from it?
+  Applicability code: hand_controlled_motion_expected
+  Pre-video condition: The object&#x27;s motion should be caused by the hand grasping, pushing, pulling, or supporting it.
+S05 [S] Does required contact break unexpectedly before the action is complete?
+  Applicability code: contact_until_completion_required
+  Pre-video condition: The action requires continuous contact from contact establishment until completion.
+S06 [S] Does the hand or a finger visibly penetrate into the solid interior of the target object?
+  Applicability code: hand_object_boundary_visible
+  Pre-video condition: The hand-object boundary is visible at one or more key moments.
+S07 [S] Does the target object visibly penetrate an unintended body region?
+  Applicability code: object_near_body
+  Pre-video condition: The target object approaches the torso, arm, leg, or another body region not intended for contact.
+S08 [S] Do the hand and object fuse into an inseparable single structure at the contact region?
+  Applicability code: contact_boundary_visible
+  Pre-video condition: The hand-object contact boundary is visible at one or more key moments.
+S09 [S] Is the actual contact located on an object region unsuitable for completing the specified action?
+  Applicability code: functional_contact_region_exists
+  Pre-video condition: The action requires contact with a particular functional part or manipulable region.
+S10 [S] Is the current grasp or support contact insufficient to oppose the object&#x27;s gravity?
+  Applicability code: object_supported_against_gravity
+  Pre-video condition: The person is grasping, supporting, or suspending an object affected by gravity.
+S11 [S] Is the finger-contact distribution incapable of forming the grasp type required by the action?
+  Applicability code: finger_grasp_required
+  Pre-video condition: The action requires visible fingers to grasp, pinch, clamp, or wrap around the object.
+S12 [S] After placement is complete, does the object fail to contact the intended supporting surface?
+  Applicability code: placement_on_surface
+  Pre-video condition: The action requires placing the object on a table, floor, container, or another support surface.
+S13 [S] Is the front-back occlusion order at the hand-object boundary inconsistent with their spatial positions?
+  Applicability code: partial_hand_object_occlusion
+  Pre-video condition: The hand and object partially occlude one another during a key phase.
+S14 [S] During continuous contact, does the contact point jump to another object location without a geometric cause?
+  Applicability code: continuous_contact_visible
+  Pre-video condition: Contact is maintained and visible across consecutive frames.
+S15 [S] Does the target object undergo an obvious solid collision with an unintended body part?
+  Applicability code: object_approaches_unintended_body_part
+  Pre-video condition: The target object&#x27;s trajectory approaches a body part not intended for interaction.
+S16 [S] After release, does the object remain suspended without a new support?
+  Applicability code: release_without_new_support
+  Pre-video condition: The person releases the object and it is not caught by another hand, body part, or surface.
+M01 [M] Does the object begin controlled motion before control contact is established?
+  Applicability code: contact_then_manipulation
+  Pre-video condition: The hand should establish contact before pushing, pulling, grasping, or lifting the object.
+M02 [M] After contact breaks, does the object continue copying the hand&#x27;s controlled motion?
+  Applicability code: visible_contact_break_during_motion
+  Pre-video condition: A clear hand-object contact break is observable during motion.
+M03 [M] During a stable hold, does the object&#x27;s translation visibly lag behind the holding hand?
+  Applicability code: stable_hold_with_translation
+  Pre-video condition: The hand stably holds the object while visible translation occurs.
+M04 [M] During a stable hold, does the object move without corresponding motion of the holding hand?
+  Applicability code: stable_hold_visible
+  Pre-video condition: The hand and object are in a stable hold and both motions are observable.
+M05 [M] During a stable grasp, does the object slip unexpectedly relative to the palm?
+  Applicability code: stable_grasp_without_slip_action
+  Pre-video condition: The action requires a stable grasp and does not call for deliberate sliding or regrasping.
+M06 [M] Does the object jitter independently without the motion propagating to the contacting hand?
+  Applicability code: contact_during_visible_motion
+  Pre-video condition: The hand and object remain in contact and temporal resolution is sufficient to observe short motions.
+M07 [M] Does the target object&#x27;s position teleport between adjacent moments in a way its velocity cannot explain?
+  Applicability code: object_track_observable
+  Pre-video condition: The target object is identifiable before and after the jump, or its track can be reliably matched across a brief occlusion.
+M08 [M] Does the target object&#x27;s orientation flip discontinuously between adjacent moments without a cause?
+  Applicability code: object_orientation_observable
+  Pre-video condition: The object&#x27;s appearance or geometry supports tracking its orientation continuously.
+M09 [M] Does new hand-object contact appear suddenly without the hand approaching the object?
+  Applicability code: contact_establishment_visible
+  Pre-video condition: The video contains a visible transition from separation to contact.
+M10 [M] After release, is the object&#x27;s gravity response implausibly delayed?
+  Applicability code: unsupported_release_with_observable_aftermath
+  Pre-video condition: The object has no new support after release and enough post-release video is available.
+M11 [M] Does the interaction state suddenly reset to an earlier state without a cause?
+  Applicability code: multi_phase_action
+  Pre-video condition: The action progresses through two or more temporally distinguishable states.
+M12 [M] After a brief occlusion, does the hand-object relation jump to a state incompatible with the pre-occlusion motion?
+  Applicability code: brief_occlusion_with_track_recovery
+  Pre-video condition: The hand-object relation undergoes a brief occlusion and can be reliably identified before and after it.
+A01 [A] Does a visible interacting hand have a clearly incorrect number of fingers?
+  Applicability code: interacting_fingers_countable
+  Pre-video condition: The interacting fingers are clear enough at one or more key moments to assess their count.
+A02 [A] Do two or more fingers merge non-anatomically into one structure?
+  Applicability code: interacting_fingers_visible
+  Pre-video condition: Finger contours of the interacting hand are visible at one or more key moments.
+A03 [A] Does an interacting finger joint bend in a biomechanically impossible direction?
+  Applicability code: finger_joint_pose_visible
+  Pre-video condition: At least one interacting finger joint pose is sufficiently visible.
+A04 [A] Does an interacting wrist disconnect from its corresponding forearm?
+  Applicability code: wrist_forearm_region_visible
+  Pre-video condition: The wrist-forearm connection on the interacting side is visible at one or more key moments.
+A05 [A] Does an extra hand appear from nowhere during the interaction?
+  Applicability code: upper_body_hands_observable
+  Pre-video condition: Enough of the upper body is visible to distinguish the person&#x27;s existing two hands.
+A06 [A] Does an interacting hand disappear when it should be visible and is not occluded?
+  Applicability code: interacting_hand_expected_visible
+  Pre-video condition: Based on its trajectory, the interacting hand should be in frame and is not occluded by an object or the body.
+A07 [A] Does the interacting arm length change abruptly in a way perspective cannot explain?
+  Applicability code: interacting_arm_track_visible
+  Pre-video condition: Enough shoulder, elbow, and wrist landmarks on the interacting side are visible over time.
+A08 [A] Does the interacting hand collapse into an unrecognizable structure?
+  Applicability code: interacting_hand_visible
+  Pre-video condition: The interacting hand is visible at one or more key moments.
+A09 [A] Does the target object disappear without being fully occluded or leaving the frame?
+  Applicability code: target_object_expected_visible
+  Pre-video condition: Based on its trajectory, the target object should remain in frame and is not fully occluded.
+A10 [A] Does a second copy of the target object appear without cause during the interaction?
+  Applicability code: single_target_object_expected
+  Pre-video condition: The input and action specification contain only one target object.
+A11 [A] Does a rigid target object&#x27;s geometry deform without the action requiring deformation?
+  Applicability code: rigid_object_or_shape_should_remain_stable
+  Pre-video condition: The target is rigid, or the current action should not change its global shape.
+A12 [A] Does the target object&#x27;s scale jump between adjacent moments in a way depth change cannot explain?
+  Applicability code: object_scale_trackable
+  Pre-video condition: The target object is trackable over time and camera or object depth change can be assessed.
+
+Return action_profile plus all 50 applicability judgments.</pre></details>
+<details class="protocol-detail"><summary>Complete instantiated judging request — exact example</summary><pre>SYSTEM
+You are a strict, evidence-first judge of one atomic human-object-interaction defect question.
+The question&#x27;s semantic applicability was frozen before the generated video was viewed. Therefore NOT_APPLICABLE is forbidden in this request.
+
+Inspect the complete video in temporal order, the timestamped overview, and every supplied high-detail frame strip. The target-object reference image is identity/part context only and is never evidence that generated contact or motion is correct.
+
+State rules:
+- DEFECT: visible generated-video evidence satisfies the supplied FAIL condition.
+- CLEAN: positive inspection of the relevant phase establishes that the FAIL condition does not occur. Mere presence of a person/object, intended action, proximity, or an unverified tiny image is not enough.
+- UNCERTAIN: the question is applicable, but crop, blur, occlusion, sampling, or conflicting evidence prevents a reliable decision. Uncertainty receives zero credit and must not be converted to CLEAN.
+
+For hand-object contact, CLEAN requires inspecting actual boundaries: nearby is not contact, and a visible air gap is a defect when contact/support is required. For temporal questions, inspect motion rather than inferring it from a single frame. Cite real timestamps and F01-F17 frame IDs. Reasons must describe visible pixels/motion, not restate the prompt. Return exactly one judgment for the supplied QID.
+
+USER
+Evaluate exactly one applicable defect question.
+
+Original requested prompt:
+The young woman with light brown hair pulled back stands in a brightly lit room with white walls, holding a small, light green dropper bottle labeled HOIVG-Bench. The product is a small-size bottle, compact enough to be comfortably held in one hand. She gestures expressively with her hands while demonstrating and speaking directly to the camera, showing how to use the bottle and engaging the viewer with her presentation.
+
+Object label: bottle
+Frozen pre-video action profile:
+{&quot;actor_body_parts&quot;: [&quot;hand&quot;], &quot;defining_event&quot;: null, &quot;direction&quot;: null, &quot;expected_object_count&quot;: 1, &quot;functional_relation&quot;: &quot;hand grasps the bottle to support it against gravity while gesturing&quot;, &quot;gravity_support_required&quot;: true, &quot;handedness&quot;: &quot;unspecified&quot;, &quot;main_action&quot;: &quot;holding and demonstrating&quot;, &quot;ordered_subactions&quot;: [], &quot;release_or_placement_expected&quot;: false, &quot;required_final_state&quot;: null, &quot;required_hand_count&quot;: 1, &quot;rigid_object_expected&quot;: true, &quot;sustained_contact_required&quot;: true, &quot;target_object&quot;: &quot;bottle&quot;}
+
+Frozen applicability reason: The target object is specified as a bottle, so interacting with the wrong object is relevant. / 指定了目标物体瓶子，需检查是否对错误物体执行交互。
+
+Question ID: C01
+Axis: C
+Defect question: Does the person perform the primary interaction on the wrong object?
+缺陷问题: 人物是否把主要交互动作施加在了错误物体上？
+FAIL condition: The primary interaction object is not the specified target, or the person operates only another object.
+FAIL 条件: 主要交互对象不是指定目标物体，或人物只操作了另一个物体。
+Critical: true
+
+Fixed frame/timestamp mapping:
+F01=0.000s
+F02=0.200s
+F03=0.400s
+F04=0.600s
+F05=0.800s
+F06=1.000s
+F07=1.200s
+F08=1.400s
+F09=1.600s
+F10=1.760s
+F11=1.960s
+F12=2.160s
+F13=2.360s
+F14=2.560s
+F15=2.760s
+F16=2.960s
+F17=3.160s
+
+CLEAN must cite inspected evidence. DEFECT/UNCERTAIN must cite the narrowest useful worst interval. Use VIDEO in evidence_frame_ids when evidence falls between the 17 fixed frames. Return only this QID.
+</pre></details>
+<details class="protocol-detail"><summary>Structured output schema — exact C01 example</summary><pre>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;additionalProperties&quot;: false,
+  &quot;required&quot;: [
+    &quot;judgments&quot;
+  ],
+  &quot;properties&quot;: {
+    &quot;judgments&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;minItems&quot;: 1,
+      &quot;maxItems&quot;: 1,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;additionalProperties&quot;: false,
+        &quot;required&quot;: [
+          &quot;question_id&quot;,
+          &quot;state&quot;,
+          &quot;evidence_timestamps&quot;,
+          &quot;evidence_frame_ids&quot;,
+          &quot;reason_zh&quot;,
+          &quot;reason_en&quot;,
+          &quot;confidence&quot;
+        ],
+        &quot;properties&quot;: {
+          &quot;question_id&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;enum&quot;: [
+              &quot;C01&quot;
+            ]
+          },
+          &quot;state&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;enum&quot;: [
+              &quot;DEFECT&quot;,
+              &quot;CLEAN&quot;,
+              &quot;UNCERTAIN&quot;
+            ]
+          },
+          &quot;evidence_timestamps&quot;: {
+            &quot;type&quot;: &quot;array&quot;,
+            &quot;minItems&quot;: 1,
+            &quot;maxItems&quot;: 8,
+            &quot;items&quot;: {
+              &quot;type&quot;: &quot;number&quot;,
+              &quot;minimum&quot;: 0
+            }
+          },
+          &quot;evidence_frame_ids&quot;: {
+            &quot;type&quot;: &quot;array&quot;,
+            &quot;minItems&quot;: 1,
+            &quot;maxItems&quot;: 18,
+            &quot;items&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;enum&quot;: [
+                &quot;F01&quot;,
+                &quot;F02&quot;,
+                &quot;F03&quot;,
+                &quot;F04&quot;,
+                &quot;F05&quot;,
+                &quot;F06&quot;,
+                &quot;F07&quot;,
+                &quot;F08&quot;,
+                &quot;F09&quot;,
+                &quot;F10&quot;,
+                &quot;F11&quot;,
+                &quot;F12&quot;,
+                &quot;F13&quot;,
+                &quot;F14&quot;,
+                &quot;F15&quot;,
+                &quot;F16&quot;,
+                &quot;F17&quot;,
+                &quot;VIDEO&quot;
+              ]
+            }
+          },
+          &quot;reason_zh&quot;: {
+            &quot;type&quot;: &quot;string&quot;
+          },
+          &quot;reason_en&quot;: {
+            &quot;type&quot;: &quot;string&quot;
+          },
+          &quot;confidence&quot;: {
+            &quot;type&quot;: &quot;number&quot;,
+            &quot;minimum&quot;: 0,
+            &quot;maximum&quot;: 1
+          }
+        }
+      }
+    }
+  }
+}</pre></details>
+<p>The runtime validates the single returned QID, allowed states, required English/Chinese rationales, timestamps within the clip, evidence IDs F01–F17 or VIDEO, and confidence in [0, 1]. Timestamp metadata can be supplemented from the fixed frame-ID mapping. Confidence is recorded for auditability and does not weight the score or represent calibrated human agreement.</p>
+<p>Download the <a href="../downloads/vlm-qa/release/judging-example.txt" download>complete judging example</a>, <a href="../downloads/vlm-qa/release/profile-prompt-example.txt" download>pre-video profile prompt example</a>, <a href="../downloads/vlm-qa/release/profile-schema.json" download>profile response schema</a>, and <a href="../downloads/vlm-qa/release/judgment-schema-C01.json" download>judging response schema</a>.</p>
+</section>
+<section id="question-bank"><h2>5. Complete 50-question bank</h2>
+<p>All English question texts, applicability conditions, and FAIL conditions below are reproduced directly from the protocol configuration. Every question asks whether a defect is present. The critical marker is the stored question flag; cap triggers are specified separately in Section 2.</p>
+<p class="question-links"><a href="#questions-C">C · Action (10)</a><a href="#questions-S">S · Contact (16)</a><a href="#questions-M">M · Motion (12)</a><a href="#questions-A">A · Structure (12)</a></p>
+<div id="questions-C" class="question-group"><h3>C · Action correctness and completion (10 questions)</h3><div class="table-wrap"><table class="question-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>ID</th><th>Defect question</th><th>Applies when</th><th>FAIL condition</th></tr></thead><tbody><tr id="question-C01"><th scope="row" class="qid">C01<span class="critical-label">critical</span></th><td>Does the person perform the primary interaction on the wrong object?</td><td>The action specification or conditioning input identifies a target object.</td><td>The primary interaction object is not the specified target, or the person operates only another object.</td></tr><tr id="question-C02"><th scope="row" class="qid">C02<span class="critical-label">critical</span></th><td>Does the required primary interaction action fail to start at all?</td><td>Every video with a target HOI action.</td><td>The person makes no recognizable attempt to perform the action on the target object.</td></tr><tr id="question-C03"><th scope="row" class="qid">C03<span class="critical-label">critical</span></th><td>Does the person only approach or pose without reaching the action&#x27;s defining interaction event?</td><td>The action has a defining event such as grasping, wearing, opening, lifting, or placing.</td><td>The defining interaction event required by the action specification never occurs.</td></tr><tr id="question-C04"><th scope="row" class="qid">C04<span class="critical-label">critical</span></th><td>Does the object fail to reach the final state required by the action specification?</td><td>The action specification defines an observable final state.</td><td>Before the video ends, the target object does not reach the required final position, pose, or functional state.</td></tr><tr id="question-C05"><th scope="row" class="qid">C05</th><td>Is the body part performing the primary action inconsistent with the action specification?</td><td>The action explicitly or inherently requires a particular body part.</td><td>The primary action is performed by the wrong body part.</td></tr><tr id="question-C06"><th scope="row" class="qid">C06</th><td>Is the left or right hand used for the action inconsistent with the action specification?</td><td>The action specification explicitly states left or right hand.</td><td>The action is performed with the opposite hand from the specified side.</td></tr><tr id="question-C07"><th scope="row" class="qid">C07</th><td>Is the number of hands participating in the primary action inconsistent with the action specification?</td><td>The action explicitly or inherently requires one hand or two hands.</td><td>The action requires one hand but uses two, or requires two hands but only one participates.</td></tr><tr id="question-C08"><th scope="row" class="qid">C08<span class="critical-label">critical</span></th><td>Do the required sub-actions occur in the wrong order?</td><td>The action contains two or more sub-actions with a required order.</td><td>At least one required sub-action occurs before its prerequisite, invalidating the action logic.</td></tr><tr id="question-C09"><th scope="row" class="qid">C09</th><td>Is the object&#x27;s motion direction opposite to the direction specified by the action?</td><td>The action specifies a direction such as up, down, left, right, clockwise, or counterclockwise.</td><td>The primary object motion is clearly opposite to the specified direction.</td></tr><tr id="question-C10"><th scope="row" class="qid">C10<span class="critical-label">critical</span></th><td>Is a required sustained action state lost before the specified phase ends?</td><td>The action requires holding, wearing, supporting, or maintaining an object state for a period.</td><td>The required state clearly ends before the specified phase is over and is not plausibly restored.</td></tr></tbody></table></div></div><div id="questions-S" class="question-group"><h3>S · Contact, support, and spatial relations (16 questions)</h3><div class="table-wrap"><table class="question-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>ID</th><th>Defect question</th><th>Applies when</th><th>FAIL condition</th></tr></thead><tbody><tr id="question-S01"><th scope="row" class="qid">S01<span class="critical-label">critical</span></th><td>During a phase that requires contact, does the specified body part never contact the target object?</td><td>The action contains a phase that requires body-object contact.</td><td>Throughout the key phase, the specified body part remains visibly separated from the target object.</td></tr><tr id="question-S02"><th scope="row" class="qid">S02<span class="critical-label">critical</span></th><td>While contact must be maintained, is there a clear air gap between the hand and the object surface?</td><td>The hand must remain in contact during a key phase and the contact region is visible.</td><td>At least one clear frame shows a visible nonzero gap where the hand should contact the object surface.</td></tr><tr id="question-S03"><th scope="row" class="qid">S03<span class="critical-label">critical</span></th><td>When hand or body support is required, does the object float without any visible support?</td><td>The object should not self-float and the phase requires a hand, body part, or visible surface to oppose gravity.</td><td>The object is clearly separated from every possible support yet remains suspended or stably stationary.</td></tr><tr id="question-S04"><th scope="row" class="qid">S04<span class="critical-label">critical</span></th><td>Does the object translate or rotate as if controlled by the hand while clearly detached from it?</td><td>The object&#x27;s motion should be caused by the hand grasping, pushing, pulling, or supporting it.</td><td>A clear hand-object gap exists while the object continues to copy the hand&#x27;s control trajectory.</td></tr><tr id="question-S05"><th scope="row" class="qid">S05<span class="critical-label">critical</span></th><td>Does required contact break unexpectedly before the action is complete?</td><td>The action requires continuous contact from contact establishment until completion.</td><td>Contact clearly breaks before the completion event even though the action does not require release.</td></tr><tr id="question-S06"><th scope="row" class="qid">S06<span class="critical-label">critical</span></th><td>Does the hand or a finger visibly penetrate into the solid interior of the target object?</td><td>The hand-object boundary is visible at one or more key moments.</td><td>The hand or finger crosses the outer surface into a rigid solid interior without the action requiring insertion.</td></tr><tr id="question-S07"><th scope="row" class="qid">S07<span class="critical-label">critical</span></th><td>Does the target object visibly penetrate an unintended body region?</td><td>The target object approaches the torso, arm, leg, or another body region not intended for contact.</td><td>The object surface crosses the body boundary into body volume without the action requiring it.</td></tr><tr id="question-S08"><th scope="row" class="qid">S08<span class="critical-label">critical</span></th><td>Do the hand and object fuse into an inseparable single structure at the contact region?</td><td>The hand-object contact boundary is visible at one or more key moments.</td><td>The two-surface boundary becomes uninterpretable because hand texture or geometry continuously melts into the object.</td></tr><tr id="question-S09"><th scope="row" class="qid">S09</th><td>Is the actual contact located on an object region unsuitable for completing the specified action?</td><td>The action requires contact with a particular functional part or manipulable region.</td><td>Contact occurs on a region that cannot produce the required functional effect.</td></tr><tr id="question-S10"><th scope="row" class="qid">S10<span class="critical-label">critical</span></th><td>Is the current grasp or support contact insufficient to oppose the object&#x27;s gravity?</td><td>The person is grasping, supporting, or suspending an object affected by gravity.</td><td>The visible contact lies where it cannot bear the load and no other support explains the object&#x27;s stability.</td></tr><tr id="question-S11"><th scope="row" class="qid">S11</th><td>Is the finger-contact distribution incapable of forming the grasp type required by the action?</td><td>The action requires visible fingers to grasp, pinch, clamp, or wrap around the object.</td><td>The visible fingers are not positioned to apply the required holding force.</td></tr><tr id="question-S12"><th scope="row" class="qid">S12<span class="critical-label">critical</span></th><td>After placement is complete, does the object fail to contact the intended supporting surface?</td><td>The action requires placing the object on a table, floor, container, or another support surface.</td><td>In the completed placement state, a clear gap remains between the object and intended support surface.</td></tr><tr id="question-S13"><th scope="row" class="qid">S13</th><td>Is the front-back occlusion order at the hand-object boundary inconsistent with their spatial positions?</td><td>The hand and object partially occlude one another during a key phase.</td><td>Within the same local relation, the foreground surface is covered by the background surface without motion that could explain the change.</td></tr><tr id="question-S14"><th scope="row" class="qid">S14</th><td>During continuous contact, does the contact point jump to another object location without a geometric cause?</td><td>Contact is maintained and visible across consecutive frames.</td><td>The contact point changes discontinuously without sufficient relative hand-object motion to explain it.</td></tr><tr id="question-S15"><th scope="row" class="qid">S15<span class="critical-label">critical</span></th><td>Does the target object undergo an obvious solid collision with an unintended body part?</td><td>The target object&#x27;s trajectory approaches a body part not intended for interaction.</td><td>The object hits an unintended body part without plausible avoidance, stopping, or collision response.</td></tr><tr id="question-S16"><th scope="row" class="qid">S16<span class="critical-label">critical</span></th><td>After release, does the object remain suspended without a new support?</td><td>The person releases the object and it is not caught by another hand, body part, or surface.</td><td>Contact has clearly ended, yet the object remains fixed or suspended against gravity.</td></tr></tbody></table></div></div><div id="questions-M" class="question-group"><h3>M · Hand-object motion synchronization and timing (12 questions)</h3><div class="table-wrap"><table class="question-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>ID</th><th>Defect question</th><th>Applies when</th><th>FAIL condition</th></tr></thead><tbody><tr id="question-M01"><th scope="row" class="qid">M01<span class="critical-label">critical</span></th><td>Does the object begin controlled motion before control contact is established?</td><td>The hand should establish contact before pushing, pulling, grasping, or lifting the object.</td><td>The object starts moving along the hand&#x27;s subsequent trajectory before the hand contacts it.</td></tr><tr id="question-M02"><th scope="row" class="qid">M02<span class="critical-label">critical</span></th><td>After contact breaks, does the object continue copying the hand&#x27;s controlled motion?</td><td>A clear hand-object contact break is observable during motion.</td><td>After separation, the object continues on an approximately rigidly synchronized trajectory with the hand.</td></tr><tr id="question-M03"><th scope="row" class="qid">M03<span class="critical-label">critical</span></th><td>During a stable hold, does the object&#x27;s translation visibly lag behind the holding hand?</td><td>The hand stably holds the object while visible translation occurs.</td><td>The holding hand translates first and the object catches up later, creating a visible temporal delay.</td></tr><tr id="question-M04"><th scope="row" class="qid">M04<span class="critical-label">critical</span></th><td>During a stable hold, does the object move without corresponding motion of the holding hand?</td><td>The hand and object are in a stable hold and both motions are observable.</td><td>The object undergoes clear rigid motion while the holding hand remains essentially stationary.</td></tr><tr id="question-M05"><th scope="row" class="qid">M05</th><td>During a stable grasp, does the object slip unexpectedly relative to the palm?</td><td>The action requires a stable grasp and does not call for deliberate sliding or regrasping.</td><td>The object moves relative to the palm or fixed fingers without a regrasping action.</td></tr><tr id="question-M06"><th scope="row" class="qid">M06</th><td>Does the object jitter independently without the motion propagating to the contacting hand?</td><td>The hand and object remain in contact and temporal resolution is sufficient to observe short motions.</td><td>The object shows one or more high-frequency position jumps without corresponding motion in the contacting hand.</td></tr><tr id="question-M07"><th scope="row" class="qid">M07<span class="critical-label">critical</span></th><td>Does the target object&#x27;s position teleport between adjacent moments in a way its velocity cannot explain?</td><td>The target object is identifiable before and after the jump, or its track can be reliably matched across a brief occlusion.</td><td>The object appears at a clearly different position without traversing an intermediate path.</td></tr><tr id="question-M08"><th scope="row" class="qid">M08</th><td>Does the target object&#x27;s orientation flip discontinuously between adjacent moments without a cause?</td><td>The object&#x27;s appearance or geometry supports tracking its orientation continuously.</td><td>The orientation changes substantially without enough hand or object motion to cause the rotation.</td></tr><tr id="question-M09"><th scope="row" class="qid">M09</th><td>Does new hand-object contact appear suddenly without the hand approaching the object?</td><td>The video contains a visible transition from separation to contact.</td><td>Adjacent moments change from clear separation directly to contact without sufficient approach motion.</td></tr><tr id="question-M10"><th scope="row" class="qid">M10<span class="critical-label">critical</span></th><td>After release, is the object&#x27;s gravity response implausibly delayed?</td><td>The object has no new support after release and enough post-release video is available.</td><td>Contact has ended, but the object does not begin falling or responding until multiple discernible time steps later.</td></tr><tr id="question-M11"><th scope="row" class="qid">M11</th><td>Does the interaction state suddenly reset to an earlier state without a cause?</td><td>The action progresses through two or more temporally distinguishable states.</td><td>The person, hand, or object abruptly returns to a previously completed state without a reversing action.</td></tr><tr id="question-M12"><th scope="row" class="qid">M12<span class="critical-label">critical</span></th><td>After a brief occlusion, does the hand-object relation jump to a state incompatible with the pre-occlusion motion?</td><td>The hand-object relation undergoes a brief occlusion and can be reliably identified before and after it.</td><td>After occlusion, contact side, relative position, or grasp state changes in a way the pre-occlusion trajectory cannot explain.</td></tr></tbody></table></div></div><div id="questions-A" class="question-group"><h3>A · Hand, limb, and object structure (12 questions)</h3><div class="table-wrap"><table class="question-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>ID</th><th>Defect question</th><th>Applies when</th><th>FAIL condition</th></tr></thead><tbody><tr id="question-A01"><th scope="row" class="qid">A01</th><td>Does a visible interacting hand have a clearly incorrect number of fingers?</td><td>The interacting fingers are clear enough at one or more key moments to assess their count.</td><td>One hand visibly has fewer or more than five fingers, and occlusion does not explain the count.</td></tr><tr id="question-A02"><th scope="row" class="qid">A02</th><td>Do two or more fingers merge non-anatomically into one structure?</td><td>Finger contours of the interacting hand are visible at one or more key moments.</td><td>Fingers that should be separate lack an explainable boundary and form one continuous finger-like structure.</td></tr><tr id="question-A03"><th scope="row" class="qid">A03<span class="critical-label">critical</span></th><td>Does an interacting finger joint bend in a biomechanically impossible direction?</td><td>At least one interacting finger joint pose is sufficiently visible.</td><td>A finger joint shows clear backward folding, out-of-range twisting, or an impossible joint connection.</td></tr><tr id="question-A04"><th scope="row" class="qid">A04<span class="critical-label">critical</span></th><td>Does an interacting wrist disconnect from its corresponding forearm?</td><td>The wrist-forearm connection on the interacting side is visible at one or more key moments.</td><td>A clear break, floating connection, or incorrect topology appears between wrist and forearm.</td></tr><tr id="question-A05"><th scope="row" class="qid">A05<span class="critical-label">critical</span></th><td>Does an extra hand appear from nowhere during the interaction?</td><td>Enough of the upper body is visible to distinguish the person&#x27;s existing two hands.</td><td>A third hand appears simultaneously or sequentially without correspondence to either normal arm.</td></tr><tr id="question-A06"><th scope="row" class="qid">A06<span class="critical-label">critical</span></th><td>Does an interacting hand disappear when it should be visible and is not occluded?</td><td>Based on its trajectory, the interacting hand should be in frame and is not occluded by an object or the body.</td><td>The interacting hand is entirely absent in an unoccluded frame and later reappears without cause.</td></tr><tr id="question-A07"><th scope="row" class="qid">A07<span class="critical-label">critical</span></th><td>Does the interacting arm length change abruptly in a way perspective cannot explain?</td><td>Enough shoulder, elbow, and wrist landmarks on the interacting side are visible over time.</td><td>The arm visibly lengthens or shortens to reach the object without perspective or joint motion explaining it.</td></tr><tr id="question-A08"><th scope="row" class="qid">A08<span class="critical-label">critical</span></th><td>Does the interacting hand collapse into an unrecognizable structure?</td><td>The interacting hand is visible at one or more key moments.</td><td>Palm and finger topology is largely lost, melted, or replaced by an uninterpretable blob.</td></tr><tr id="question-A09"><th scope="row" class="qid">A09<span class="critical-label">critical</span></th><td>Does the target object disappear without being fully occluded or leaving the frame?</td><td>Based on its trajectory, the target object should remain in frame and is not fully occluded.</td><td>The target object is entirely absent when it should be visible and may later reappear without cause.</td></tr><tr id="question-A10"><th scope="row" class="qid">A10<span class="critical-label">critical</span></th><td>Does a second copy of the target object appear without cause during the interaction?</td><td>The input and action specification contain only one target object.</td><td>Two target copies appear simultaneously or sequentially without occlusion, reflection, or a pre-existing scene object explaining them.</td></tr><tr id="question-A11"><th scope="row" class="qid">A11</th><td>Does a rigid target object&#x27;s geometry deform without the action requiring deformation?</td><td>The target is rigid, or the current action should not change its global shape.</td><td>The object&#x27;s contour or part proportions bend, melt, or stretch in a way viewpoint change cannot explain.</td></tr><tr id="question-A12"><th scope="row" class="qid">A12</th><td>Does the target object&#x27;s scale jump between adjacent moments in a way depth change cannot explain?</td><td>The target object is trackable over time and camera or object depth change can be assessed.</td><td>The object&#x27;s image scale suddenly grows or shrinks without corresponding depth or camera motion.</td></tr></tbody></table></div></div>
+<p>Download the <a href="../downloads/vlm-qa/release/question-bank.json" download>original bilingual JSON</a> or <a href="../downloads/vlm-qa/release/question-bank.md" download>English Markdown question bank</a>.</p>
+</section>
+<section id="reproduction"><h2>6. Protocol downloads</h2>
+<p>The documentation download contains the complete question configuration, applicability and failure rules, category weights and caps, exact prompt examples, response schemas, and judge settings.</p>
+<div class="table-wrap"><table><thead><tr><th>Download</th><th>Contents</th></tr></thead><tbody><tr><th scope="row"><a href="../downloads/vlm-qa/vlm-qa-protocol.zip" download>Complete protocol documentation (ZIP)</a></th><td>Questions, applicability and FAIL rules, prompts, response schemas, settings and checksums.</td></tr><tr><th scope="row"><a href="../downloads/vlm-qa/release/question-bank.json" download>Original bilingual protocol JSON</a></th><td>All 50 questions, category weights and seven critical-failure rules.</td></tr><tr><th scope="row"><a href="../downloads/vlm-qa/release/question-bank.md" download>English question bank</a></th><td>Exact question text, applicability conditions and FAIL conditions.</td></tr><tr><th scope="row"><a href="../downloads/vlm-qa/release/judging-example.txt" download>Complete judging prompt</a></th><td>Exact system prompt and instantiated user request.</td></tr><tr><th scope="row"><a href="../downloads/vlm-qa/release/profile-prompt-example.txt" download>Pre-video profile prompt</a></th><td>Complete applicability system/user example with all 50 questions.</td></tr><tr><th scope="row"><a href="../downloads/vlm-qa/release/profile-schema.json" download>Profile response schema</a></th><td>Action profile and applicability response format.</td></tr><tr><th scope="row"><a href="../downloads/vlm-qa/release/judgment-schema-C01.json" download>Judging response schema</a></th><td>Exact structured-output example for an applicable question.</td></tr><tr><th scope="row"><a href="../downloads/vlm-qa/release/judge-settings.json" download>Judge settings</a></th><td>Recorded model/backend, decoding settings and requested full-video sampling rate.</td></tr></tbody></table></div>
+<h3>Sampling pseudocode</h3>
+<pre>indices = [round(j * (N - 1) / 16) for j in range(17)]
+timestamps = [index / fps for index in indices]</pre>
+<h3>Scoring checks</h3>
+<p>If all applicable questions are CLEAN, the score is 100. If S02 alone is DEFECT, the contact category is capped at 50 and the overall score at 60. A C01, C02, or C03 DEFECT caps action at zero and therefore yields a zero harmonic overall score. The general formulas and all trigger rules are specified in Section 2.</p>
+</section>
+</div></div></main>
+</body></html>

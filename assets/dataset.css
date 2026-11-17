@@ -1,0 +1,48 @@
+.dataset-page .shell { max-width: 1360px; padding-left: 24px; padding-right: 24px; }
+.dataset-page .header-inner { min-height: 44px; }
+.dataset-page .brand { gap: 8px; }
+.dataset-page .brand-mark { width: 27px; height: 27px; font-size: 14px; }
+.dataset-page .brand-copy strong { font-size: 13px; }
+.dataset-page .brand-copy > span { display: none; }
+.dataset-page .page-nav { font-size: 11px; }
+.dataset-page .anonymous-label { font-size: 10px; }
+.dataset-heading { padding: 20px 0 14px; }
+.dataset-heading h1 { margin: 0 0 6px; font-family: var(--sans); font-size: 23px; line-height: 1.3; font-weight: 600; letter-spacing: -.4px; }
+.dataset-heading p { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.5; }
+.distribution-table-wrap { overflow-x: auto; background: white; border: 1px solid var(--line); border-radius: 4px; }
+.distribution-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 12px; line-height: 1.65; }
+.primary-column { width: 24%; }
+.share-column { width: 7%; }
+.distribution-table th, .distribution-table td { padding: 10px 14px; text-align: left; vertical-align: top; }
+.distribution-table thead { background: #eaf0e7; }
+.distribution-table thead th { font-size: 11px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line); }
+.distribution-table tbody th { font-weight: 600; color: var(--ink); }
+.distribution-table tbody tr + tr > * { border-top: 1px solid #e8ece4; }
+.distribution-table tbody tr:nth-child(even) { background: #fafbf8; }
+.distribution-table .primary-share { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.secondary-categories { color: #53624f; }
+.secondary-share { white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--ink); }
+.distribution-table tfoot { background: #f0f4ed; color: var(--ink); }
+.distribution-table tfoot th, .distribution-table tfoot td { border-top: 1px solid var(--line); font-weight: 600; padding-top: 8px; padding-bottom: 8px; }
+.dataset-downloads { display: flex; gap: 8px; align-items: baseline; margin: 12px 0 24px; color: var(--muted); font-size: 11px; }
+.dataset-downloads a { color: var(--accent); text-underline-offset: 2px; }
+@media (max-width: 760px) {
+  .dataset-page .shell { padding-left: 14px; padding-right: 14px; }
+  .dataset-page .header-inner { gap: 12px; }
+  .dataset-page .page-nav { gap: 12px; font-size: 10px; }
+  .dataset-heading { padding-top: 16px; }
+  .dataset-heading h1 { font-size: 20px; }
+  .dataset-heading p { font-size: 11px; }
+  .distribution-table { min-width: 650px; font-size: 11px; }
+  .primary-column { width: 25%; }
+  .share-column { width: 8%; }
+  .distribution-table th, .distribution-table td { padding: 8px 10px; }
+}
+@media print {
+  .dataset-page .site-header, .dataset-downloads { display: none; }
+  .dataset-page .shell { padding: 0; max-width: none; }
+  .dataset-heading { padding-top: 0; }
+  .dataset-heading h1 { font-size: 18px; }
+  .distribution-table { font-size: 10px; }
+  .distribution-table tr { break-inside: avoid; }
+}

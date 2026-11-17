@@ -1,0 +1,2626 @@
+{
+  "description": "20 supplied qualitative cases from HOIVG-Bench; nine methods per case.",
+  "video_integrity": "All MP4 files match the supplied archive SHA-256 checksums and have not been re-encoded.",
+  "cases": [
+    {
+      "case": 1,
+      "benchmark_case": 15,
+      "prompt": "The young woman with shoulder-length dark hair, dressed in a grey sweater, holds up a light green and pink cream blush stick with a round sponge applicator in a cozy room with beige walls and soft lighting. The cream blush stick is small-size, designed to fit comfortably in one hand. She lifts the blush close to the camera, gesturing expressively with her free hand as she speaks enthusiastically about the product.",
+      "person_reference": "media/qualitative/case-01/person.png",
+      "product_reference": "media/qualitative/case-01/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-01/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1258129,
+          "sha256": "f23a43236eabc4dd69183f97d6dc5c4d6314fca6a82e463e3fd43d3e76a1c8a5"
+        },
+        {
+          "bundle_offset": 1258129,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-01/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 2116239,
+          "sha256": "d9e589dec098a6a7ae7b62730aa7d08c52450ad74349dfffc136798b8ffd3bce"
+        },
+        {
+          "bundle_offset": 3374368,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-01/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1162652,
+          "sha256": "f4ca5f36009a3467ee4aa3f0005cb706d265bf0e3a7df1b2e265cc3b98ecbdd4"
+        },
+        {
+          "bundle_offset": 4537020,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-01/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 284515,
+          "sha256": "b42c0902b2441ac47c17179e73b6c32110792d40c4734bcb963833160a4ac2c8"
+        },
+        {
+          "bundle_offset": 4821535,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-01/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 803830,
+          "sha256": "6c2d7e5430468329339992508d3fe13d45210bcb1af39ac36c24bf00954f1e81"
+        },
+        {
+          "bundle_offset": 5625365,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-01/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 632815,
+          "sha256": "be91b4873d5ac088e6dfc867d5e0eb7ec5bda7689b5018a55a33027f266a1652"
+        },
+        {
+          "bundle_offset": 6258180,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-01/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1173870,
+          "sha256": "4f5e653bf30d9e7b7ce5b28f71ad29ce9958179465b899aef9571cc3dac3f086"
+        },
+        {
+          "bundle_offset": 7432050,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-01/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 446923,
+          "sha256": "e0d89c54fff473ccb0ad50965daf35a8662a903aa9c4eb431bd5dce75c54136e"
+        },
+        {
+          "bundle_offset": 7878973,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-01/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 424297,
+          "sha256": "e97a3872907e7ea96efae77a81105375476d01df7a556a926470dab9a4c361e8"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-01/videos.bin",
+        "bytes": 8303270,
+        "sha256": "54f06f49e7d2780f7028b483dd99426ec9233c311550bca567371e397cbc706e"
+      }
+    },
+    {
+      "case": 2,
+      "benchmark_case": 20,
+      "prompt": "The man wearing a green cap and an olive green sweatshirt is holding a green jar with a pink lid labeled HOIVG-Bench in a bright, neutral indoor setting. The product is a small-size container designed for advanced oral care and daily whitening. He gestures expressively with his free hand while speaking enthusiastically to the camera, presenting the benefits of the whitening formula.",
+      "person_reference": "media/qualitative/case-02/person.png",
+      "product_reference": "media/qualitative/case-02/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-02/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 511812,
+          "sha256": "72e040b30c37d9868dccccc73a760b43feec1a6785a3c5ab7d5a979a80b4eb86"
+        },
+        {
+          "bundle_offset": 511812,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-02/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 409332,
+          "sha256": "63c63166277917e5cceb912409603eb52529d0ce151ecf28e95a3d9a0daf0812"
+        },
+        {
+          "bundle_offset": 921144,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-02/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 478717,
+          "sha256": "c45cc4729f951f9e3b1a9da8d72fa790a1e36c214b69e39f731a663d614a8a11"
+        },
+        {
+          "bundle_offset": 1399861,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-02/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 224793,
+          "sha256": "004f3bc0f4eaec853f51d596aa3a876529bdc1381f8e08ae0d24dc9a91511b53"
+        },
+        {
+          "bundle_offset": 1624654,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-02/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 525102,
+          "sha256": "47ac7df62ead8ed3266092e0248bb690562cbbeea31a4dcb5b9685ab6a25066d"
+        },
+        {
+          "bundle_offset": 2149756,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-02/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 599407,
+          "sha256": "d00cee41a190bdd543b44632e27953f72fc4178399ec8659538b36df883ca522"
+        },
+        {
+          "bundle_offset": 2749163,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-02/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 553465,
+          "sha256": "bf89dfc52c1a59ec2d01b67e199a52578f6f143ed3074f2dcb44cb7195ab3508"
+        },
+        {
+          "bundle_offset": 3302628,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-02/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 440821,
+          "sha256": "48dcc6fdeca7a0433c146d2e603f38cf5214ae64ffed02b50dc70f6bb95edf64"
+        },
+        {
+          "bundle_offset": 3743449,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-02/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 192540,
+          "sha256": "bb77a13f936337df62c5bd2644d9b6cdc19a680a7c5b32a8b1387fa236382515"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-02/videos.bin",
+        "bytes": 3935989,
+        "sha256": "016159e72bfdc5b0927df5a2a098ac04438199e3a99be3bb7ff27e20ba2aee1c"
+      }
+    },
+    {
+      "case": 3,
+      "benchmark_case": 21,
+      "prompt": "The young man in a light grey t-shirt holds a sleek black spray bottle labeled HOIVG-Bench in an outdoor setting with a glass window and greenery behind him. The bottle is regular-size, containing 300 ml or 10.1 fl oz of multi-purpose solution. He speaks directly to the camera while lifting the bottle with one hand, gesturing expressively with the other, and shaking it to demonstrate the product's features.",
+      "person_reference": "media/qualitative/case-03/person.png",
+      "product_reference": "media/qualitative/case-03/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-03/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1031399,
+          "sha256": "5a930399cfa570ccfed51cb8c5056fbd7f1175735f7de2a3673dfbae2952c26d"
+        },
+        {
+          "bundle_offset": 1031399,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-03/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1567132,
+          "sha256": "8477f90736497917c52884d2f57766e6f28652501e24384011c95dd51850d66f"
+        },
+        {
+          "bundle_offset": 2598531,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-03/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1017854,
+          "sha256": "5edbaba62532498fafc050bda3d8408ebaecfa078829f856ceb2120bcf79655d"
+        },
+        {
+          "bundle_offset": 3616385,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-03/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 477143,
+          "sha256": "f9dcc900e24bf6b25bbc1100f50394c232238b7a61bff4ce5c1cd3874c896f7c"
+        },
+        {
+          "bundle_offset": 4093528,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-03/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 966619,
+          "sha256": "5e3f30fdbfa2a37ac0176d4ae7080ca76ce44d1128f5dc3a6cfb935660c4f7eb"
+        },
+        {
+          "bundle_offset": 5060147,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-03/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 816004,
+          "sha256": "0f4501620488bcd4d6a4857f61b05eb037d622d2667d696f440c721a3906dfa8"
+        },
+        {
+          "bundle_offset": 5876151,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-03/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 775280,
+          "sha256": "edc18bc624b80c5f1dcff60a6eba6ebf9a7bb4c46de30c97b8e3ec54c7108415"
+        },
+        {
+          "bundle_offset": 6651431,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-03/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 608210,
+          "sha256": "bd8af35f3ec99298a9f3a42ca3b4eb4b8a32c51e94bb278634351686a54da9fd"
+        },
+        {
+          "bundle_offset": 7259641,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-03/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 507967,
+          "sha256": "f99a9056895d106c4990314b91798fb1dddd612c0988556b8d3f28b7c41b9d05"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-03/videos.bin",
+        "bytes": 7767608,
+        "sha256": "c96ecc40efec3d0c27e2d9634dd5e1d2eed486b0fee6c1e952f9b028b68de44c"
+      }
+    },
+    {
+      "case": 4,
+      "benchmark_case": 22,
+      "prompt": "The young woman in a light denim jacket and white shirt holds a green bottle of HOIVG-Bench fine fragrance in a cozy bedroom setting. The perfume bottle is regular-size, typical for an eau de parfum. She gestures expressively with the bottle, speaking directly to the camera as she introduces and describes the fragrance.",
+      "person_reference": "media/qualitative/case-04/person.png",
+      "product_reference": "media/qualitative/case-04/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-04/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 700302,
+          "sha256": "54663c27d568bdd30d86d74f20fda7573a8bc432b16a6963fcd6ba310ac08b47"
+        },
+        {
+          "bundle_offset": 700302,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-04/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 686521,
+          "sha256": "1ce11bf87eab5c8856bd86b79cb1829775a7b09f331e93a2c29eca5071e086ac"
+        },
+        {
+          "bundle_offset": 1386823,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-04/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 616780,
+          "sha256": "2ea45b6c96ee0d4e249ba438abd4ade047cd5f88b01512aa76daed46bdac1af9"
+        },
+        {
+          "bundle_offset": 2003603,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-04/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 290135,
+          "sha256": "1cfbe33ff795f2bfd0359e4de00bcd866dba1cd9fcc0dfcde17b941266020d23"
+        },
+        {
+          "bundle_offset": 2293738,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-04/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 775293,
+          "sha256": "5f30d64ddfbf6832ef2497b1dc0747789c50d796348c562cc26e1bf42a0c5871"
+        },
+        {
+          "bundle_offset": 3069031,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-04/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 690355,
+          "sha256": "ba34e49c577a2e38a7a5fe084d0f75b4a5f21e4772c2332f22fbc5760eb0848a"
+        },
+        {
+          "bundle_offset": 3759386,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-04/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 795223,
+          "sha256": "a4d6a13308a46cea1bdbb4047993b1ae2601ac6d5cd750595633c91fbe965772"
+        },
+        {
+          "bundle_offset": 4554609,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-04/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 554372,
+          "sha256": "eabc448c9652e1e14d60b0698ada02ca2944b23f1499f0abfa5a61cb2a257b80"
+        },
+        {
+          "bundle_offset": 5108981,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-04/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 323437,
+          "sha256": "1468d0483f036e2c3797d96959b1ab8ce1b18cdaabd8985676c706e945832e40"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-04/videos.bin",
+        "bytes": 5432418,
+        "sha256": "45544ca6c8f703931cc7a9caf30b50732ba3ee0e5fe5d800ae27cca1ce040d47"
+      }
+    },
+    {
+      "case": 5,
+      "benchmark_case": 29,
+      "prompt": "The young woman with long dark hair, dressed in a mustard yellow knit sweater, holds a pale green pouch labeled 'HOIVG-Bench' in front of a warm, softly blurred autumn background. The pouch is small-size, fitting comfortably within one hand. She engages the camera with lively conversation, using expressive hand gestures to emphasize key points about the product.",
+      "person_reference": "media/qualitative/case-05/person.png",
+      "product_reference": "media/qualitative/case-05/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-05/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 994971,
+          "sha256": "4fb29fd7ffbffda9681abe1d2c5f374709f32b76711d2813dea1ff6dbfb445eb"
+        },
+        {
+          "bundle_offset": 994971,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-05/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1347785,
+          "sha256": "e74ecbc6dceaf648e913031e42fc7d4eaac603340afe3bf09296557319d3365e"
+        },
+        {
+          "bundle_offset": 2342756,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-05/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 822938,
+          "sha256": "66477ac2b500e3bbc9bbdf077f5bd202a0273eb4944db02683a97106eedfbdbe"
+        },
+        {
+          "bundle_offset": 3165694,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-05/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 280378,
+          "sha256": "732649fb7c4cbf9e50b3195625c0b134958e72927791cb3494508351673164a2"
+        },
+        {
+          "bundle_offset": 3446072,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-05/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 741539,
+          "sha256": "96530e80775c5cfb5485016d672ec3aba234fb821a97aba3dfc3af56b4677cbb"
+        },
+        {
+          "bundle_offset": 4187611,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-05/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 669735,
+          "sha256": "848cc564b4382bd95ddf91c39911e768582c27f50a7ce270270f08ee07d663cc"
+        },
+        {
+          "bundle_offset": 4857346,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-05/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 835610,
+          "sha256": "d43f60f965cb637d7bd6046c5578b953aaab280c0ab1a88f22dfd6cba91bbcac"
+        },
+        {
+          "bundle_offset": 5692956,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-05/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 473725,
+          "sha256": "5a9739a22797807ec28234dcbbc0916481fbf79b327854b7f7bcae5ecea65512"
+        },
+        {
+          "bundle_offset": 6166681,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-05/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 493181,
+          "sha256": "854ebb2f75da3d8e1113db50ee48b82bbc96cd1b2e6a1b1616e0ef213f0a7676"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-05/videos.bin",
+        "bytes": 6659862,
+        "sha256": "7354928f01ac7790b7673085a9a5c1875f4a740b9bad98407d714d63f7d474ae"
+      }
+    },
+    {
+      "case": 6,
+      "benchmark_case": 31,
+      "prompt": "The woman in a fitted brown long-sleeve top stands indoors in a warmly lit room, holding a small green glass bottle of HOIVG-Bench Premium Quality Serum. The serum bottle is very small-size, fitting easily in her hand with a white pump dispenser. She gestures expressively with her free hand while explaining the benefits of the advanced cell repair formula, speaking confidently to the camera.",
+      "person_reference": "media/qualitative/case-06/person.png",
+      "product_reference": "media/qualitative/case-06/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-06/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 463822,
+          "sha256": "ac8c26dc3583749823c93cf260a43973a5d7bc95b03e8094309a2b353a737953"
+        },
+        {
+          "bundle_offset": 463822,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-06/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 446589,
+          "sha256": "b0ee8c96402432c7362ec10c68a6825922d56520b4a1acb2933066449171f2a1"
+        },
+        {
+          "bundle_offset": 910411,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-06/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 428181,
+          "sha256": "c1455c3cde5c24750fc0dc0b3af9eb1b8e185e4f9e1cbcf01fd2ac0f3cf147ff"
+        },
+        {
+          "bundle_offset": 1338592,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-06/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 202344,
+          "sha256": "0b0bbcb4dc2f541df284eb11ca933b9d9b90dd6b95d981faa8cc5c64ba18f84b"
+        },
+        {
+          "bundle_offset": 1540936,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-06/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 506715,
+          "sha256": "0f9f24f537f73d8987b34004ae8cf272ee7e349fc5debf0e84e12d9d06da01f6"
+        },
+        {
+          "bundle_offset": 2047651,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-06/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 495815,
+          "sha256": "e2ab205286c6e538a31dfd045752c0bd7ff9bf3bfbbad91fb18f8a34d9d1971f"
+        },
+        {
+          "bundle_offset": 2543466,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-06/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 476612,
+          "sha256": "2cdce1460606ad54354428d6d7d0bb9a9d6018e1d7ec834ce927d8f5cea656df"
+        },
+        {
+          "bundle_offset": 3020078,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-06/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 370862,
+          "sha256": "4a73b23222e31edb0456a81ba66648b0609e39c36eeab4bb4f1188aca1c3aa44"
+        },
+        {
+          "bundle_offset": 3390940,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-06/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 223860,
+          "sha256": "bbfa190f6f3bdcaaae0c540d5820b6fa28f4d6b0c6682e012e7e5770744270b8"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-06/videos.bin",
+        "bytes": 3614800,
+        "sha256": "60f965ea0e36d21a0432fe18f8c8d6dca91084dad3c0dd30ec65a7a1a7ba893a"
+      }
+    },
+    {
+      "case": 7,
+      "benchmark_case": 33,
+      "prompt": "The young woman with shoulder-length wavy brunette hair, dressed in a cream blouse and blue jeans, holds a beige jar labeled HOIVG-Bench in a cozy indoor room with shelves and beauty products in the background. The jar is regular-size, typical for skincare or all-purpose formulas. She holds the jar confidently with one hand while gesturing expressively with the other, speaking directly to the camera as she presents the product.",
+      "person_reference": "media/qualitative/case-07/person.png",
+      "product_reference": "media/qualitative/case-07/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-07/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 724171,
+          "sha256": "91c2a56c54e7e4a05ba9047918535ca96918f4026fe342b0106a0db0502e8699"
+        },
+        {
+          "bundle_offset": 724171,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-07/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 605398,
+          "sha256": "a559198b2f8bc17f25c2e9a3e42987279aa9866d2d360d1bd195c000dfad29f0"
+        },
+        {
+          "bundle_offset": 1329569,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-07/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 550797,
+          "sha256": "f584a870993b91b0ddde4df7266458e584a71b01b8ff63ddca6c05d639e36e4b"
+        },
+        {
+          "bundle_offset": 1880366,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-07/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 261410,
+          "sha256": "11228bd477ba4df0151e70bcea2f429cc5a330b8382157f831d534b86a602d84"
+        },
+        {
+          "bundle_offset": 2141776,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-07/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 649843,
+          "sha256": "676158b1a49bb2e3a0c8bb5d36d22c0a9402560db7dce571304abcfe1d6d6e20"
+        },
+        {
+          "bundle_offset": 2791619,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-07/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 600225,
+          "sha256": "99d30b2c4cfae66e0002b03127350396e409406ec390c5342c0066f0789574f0"
+        },
+        {
+          "bundle_offset": 3391844,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-07/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 621182,
+          "sha256": "649933889f6af3f3a97f91058a647009f1355f08afdfc94ba798482c609dfdcf"
+        },
+        {
+          "bundle_offset": 4013026,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-07/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 385449,
+          "sha256": "8ef167db362db5920e5ee794a86817476c6b26f59a7755a7995094475ba42314"
+        },
+        {
+          "bundle_offset": 4398475,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-07/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 290022,
+          "sha256": "16fb66d0f6f4da07adc5ff82c94c3185c3b5446d098d4bca59420dec47ab55d7"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-07/videos.bin",
+        "bytes": 4688497,
+        "sha256": "17e8c73f1a06a2cf668894e35e776878813c16762c81449c9817c29fe5f31488"
+      }
+    },
+    {
+      "case": 8,
+      "benchmark_case": 37,
+      "prompt": "The young woman with long, wavy red hair, wearing a rust-colored knit top, is standing indoors in a warmly lit room. She holds a regular-size dark amber bottle labeled 'HOIVG-Bench' in front of her. She gestures expressively with one hand while presenting the bottle to the camera, speaking confidently and engagingly about its benefits.",
+      "person_reference": "media/qualitative/case-08/person.png",
+      "product_reference": "media/qualitative/case-08/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-08/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1066367,
+          "sha256": "41466af488bbe27a90ecad5aa7da58d6d405ff8dc60780ff9c7280daa2e9e619"
+        },
+        {
+          "bundle_offset": 1066367,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-08/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1111649,
+          "sha256": "8bd573a3cbc416e54f28c2a017384df5677edebcea7d853d60fad0d9df886991"
+        },
+        {
+          "bundle_offset": 2178016,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-08/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 908099,
+          "sha256": "55ad0ae8a3533834e153a562d35994f6bc4143a3f9188266992abe5f595e96cf"
+        },
+        {
+          "bundle_offset": 3086115,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-08/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 333279,
+          "sha256": "1eff4b3c00edbd6ac42b81791d4f0143fc909c19cb64db12bd204ba811e142f5"
+        },
+        {
+          "bundle_offset": 3419394,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-08/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 805997,
+          "sha256": "d031fa41c7df15b19685c118d6c6e48454ed53e1029629b63c06a6d7a84eb1b5"
+        },
+        {
+          "bundle_offset": 4225391,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-08/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 788368,
+          "sha256": "12f64b5b8e763adc59c8a77482cafb45ba5c6d0e1598e7a21e2dba4bf3e4896b"
+        },
+        {
+          "bundle_offset": 5013759,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-08/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 697308,
+          "sha256": "f3c79818cd8c94881f93914e234103fa77005a16d2172ff536a430d6d4025286"
+        },
+        {
+          "bundle_offset": 5711067,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-08/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 492637,
+          "sha256": "48b248e266ea8ea0049c7f272fbd94af201cdd9ca5227695c1bb98416e48f1b1"
+        },
+        {
+          "bundle_offset": 6203704,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-08/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 473546,
+          "sha256": "bfb5a5d70dd634612a7b4ca0dc01ef28b68ba13055d228e5aec77045a2f61e82"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-08/videos.bin",
+        "bytes": 6677250,
+        "sha256": "1d62b79cdd14eccb2dd89d9fdf163a70e5bfe8cd30f8871c741c93ff0eb102b1"
+      }
+    },
+    {
+      "case": 9,
+      "benchmark_case": 40,
+      "prompt": "The woman with her dark hair tied in a bun is standing against a beige background while holding a green tube of daily restorative cream. The cream is a regular-size product, containing 8 ounces (236 ml). She holds the tube confidently with one hand and uses the other to gesture expressively as she speaks directly to the camera, highlighting the features of the cream.",
+      "person_reference": "media/qualitative/case-09/person.png",
+      "product_reference": "media/qualitative/case-09/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-09/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1299010,
+          "sha256": "0e5299ff29116835557b432ce737b8e1432526030df4fa2101e648ac9934510b"
+        },
+        {
+          "bundle_offset": 1299010,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-09/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 2170165,
+          "sha256": "3ce3b979843211ed722f9ce7eca701d01ccad8b836b874ffa1e5374077a46aa9"
+        },
+        {
+          "bundle_offset": 3469175,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-09/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 825983,
+          "sha256": "54f26006b0d1b2ce2386a7ec1d985065983977d0297007a0555188775a52162e"
+        },
+        {
+          "bundle_offset": 4295158,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-09/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 538950,
+          "sha256": "8b874667eb0b066669beae377f333a442c9c5478d1921f55f8b6b8a7a5a9707b"
+        },
+        {
+          "bundle_offset": 4834108,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-09/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1217156,
+          "sha256": "949a5d507ae9e537b36dbcb4539eebafb3e17c930a48514a4344608dba89c5f4"
+        },
+        {
+          "bundle_offset": 6051264,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-09/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1015587,
+          "sha256": "8c7231120d5894fd571730802188033d16a5ec9c5db85df17db2553a0364f8b3"
+        },
+        {
+          "bundle_offset": 7066851,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-09/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1146839,
+          "sha256": "009c6b919217bb43e61f19a4ba02bf07dce1e537f2f702fbc1abdf1d7a8059bd"
+        },
+        {
+          "bundle_offset": 8213690,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-09/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 685659,
+          "sha256": "98d88e06a5cdaaa1ccd053634b7271cb768a25930df70b42c20f0b01dd2e9a32"
+        },
+        {
+          "bundle_offset": 8899349,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-09/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 919001,
+          "sha256": "f04a2ebcc70d0370ed441c150591788ce40c2e2ce67a7365cd4453d4a2f506d9"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-09/videos.bin",
+        "bytes": 9818350,
+        "sha256": "058504d9961708f81a9df8ec2612e0e2dda0ce9a2fd9e002e69489a6e1772447"
+      }
+    },
+    {
+      "case": 10,
+      "benchmark_case": 45,
+      "prompt": "The man with tousled reddish hair, dressed in a white t-shirt and gray cardigan, stands in a warmly lit kitchen holding a small green bottle of HOIVG-Bench liquid electrolyte concentrate. The bottle is very small-size, fitting easily in one hand with its 60ml capacity. He gestures expressively with one hand while presenting the product and speaking directly to the camera.",
+      "person_reference": "media/qualitative/case-10/person.png",
+      "product_reference": "media/qualitative/case-10/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-10/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 652805,
+          "sha256": "d8ad7c550ef82f62e4def4fcde3969219f4b492050c3204bf51544efb1bc50ba"
+        },
+        {
+          "bundle_offset": 652805,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-10/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 711006,
+          "sha256": "8de86ee5dc11092db46320aee999bcbc6293fa4528438e373fce91d82bcd39e1"
+        },
+        {
+          "bundle_offset": 1363811,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-10/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 472299,
+          "sha256": "70db25616810faecc5cae761feb5f42880650b2a28707f59f38461aea665ab83"
+        },
+        {
+          "bundle_offset": 1836110,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-10/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 218691,
+          "sha256": "7707fac39c25369da5c0f465eb942c863432e505dac4b4e86bebf98f27b5f590"
+        },
+        {
+          "bundle_offset": 2054801,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-10/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 724137,
+          "sha256": "0306312e3ff8d8b581444c2e344989339fbd6846bbed34ce5748cb6a881ee038"
+        },
+        {
+          "bundle_offset": 2778938,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-10/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 662217,
+          "sha256": "394f57903bf84d94680a6030fe84f45ada4dd2b84ea521b84130eb8b67cb60c3"
+        },
+        {
+          "bundle_offset": 3441155,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-10/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 663063,
+          "sha256": "b6a04f4f70cbd7cd66e161150f8b2598c57ec8be78e497f0ad62ced7de841267"
+        },
+        {
+          "bundle_offset": 4104218,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-10/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 432225,
+          "sha256": "956d42619858a1a419386fec19c0362a6291a9548f1b4222580290055d95f7e1"
+        },
+        {
+          "bundle_offset": 4536443,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-10/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 232563,
+          "sha256": "e8b4fcee5ba039c548be3a9423972c707667704353ae3a17cd09c88b9dc021f8"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-10/videos.bin",
+        "bytes": 4769006,
+        "sha256": "5b08e6ae3ef2e4335c17e36d89d49ecc3aa87ef17c623e833b3b276034cbcfc5"
+      }
+    },
+    {
+      "case": 11,
+      "benchmark_case": 54,
+      "prompt": "The woman with shoulder-length wavy brown hair, wearing a gray sweater, is standing indoors in a softly lit living room while holding a black bottle labeled HOIVG-Bench. The product is regular-size, fitting comfortably in her hand as a multi-purpose supplement container. She presents the bottle toward the camera with subtle hand movements and speaks directly to the viewer, emphasizing the benefits and features of the supplement.",
+      "person_reference": "media/qualitative/case-11/person.png",
+      "product_reference": "media/qualitative/case-11/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-11/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 734416,
+          "sha256": "d0b714f8cabf3682e4b7d7040772c92810910baf7948eec68b343903030989d9"
+        },
+        {
+          "bundle_offset": 734416,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-11/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1578969,
+          "sha256": "c18b81326b03470d45979f1d3d08bdfa55a350e099cf57d217f4c8762accf5b1"
+        },
+        {
+          "bundle_offset": 2313385,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-11/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 818119,
+          "sha256": "97fd185c3ad5cdf63ccaa70a5460c5af269e12d55817ab08270a1d3a33e4ad73"
+        },
+        {
+          "bundle_offset": 3131504,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-11/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 285601,
+          "sha256": "cd95ad76d66e2ad8e9bef491771afb3b84d0779f30d7cf3cb6d335a9f88efeba"
+        },
+        {
+          "bundle_offset": 3417105,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-11/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 837077,
+          "sha256": "9ddfecdf4b65576b9ef17f1759fe9815acfcb80955779467857df33126055c4c"
+        },
+        {
+          "bundle_offset": 4254182,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-11/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 724897,
+          "sha256": "30c9f14dff7a6013240ffbc2a43157392bc192bfed49464646cd88a47e80ed44"
+        },
+        {
+          "bundle_offset": 4979079,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-11/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 749405,
+          "sha256": "27ba5596221e1672afa5d913be28c8fddaafc58e19be968c8f8429731b932561"
+        },
+        {
+          "bundle_offset": 5728484,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-11/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 441769,
+          "sha256": "11f2046b77edec078af7139d2bdce73134f56a84485558b2147b5b5b88170965"
+        },
+        {
+          "bundle_offset": 6170253,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-11/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 584475,
+          "sha256": "4222cde86c702dec88a20bb628e3de842f47a547d32fd0dd561eaf5071ffcc06"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-11/videos.bin",
+        "bytes": 6754728,
+        "sha256": "0b57dc1b099e9f2a6c2b15b89c3bca9b35b1a99a1ea2be384b49639105afe24b"
+      }
+    },
+    {
+      "case": 12,
+      "benchmark_case": 56,
+      "prompt": "The young woman with long, wavy dark hair is holding a teal bottle of Hydrating Body Lotion against a plain white background. The bottle is small-size, designed to be comfortably held in one hand with a pump dispenser on top. She speaks directly to the camera, using expressive hand gestures to emphasize the lotion's nourishing and smoothing benefits.",
+      "person_reference": "media/qualitative/case-12/person.png",
+      "product_reference": "media/qualitative/case-12/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-12/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1023998,
+          "sha256": "af1d6fb220cfb77517242dfe098ef3622579eb32939db8419c1def446e2df48f"
+        },
+        {
+          "bundle_offset": 1023998,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-12/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1907043,
+          "sha256": "f30eab875657922e29f3a46da6886870ff6bdac28cc6ed5525756ab99a8c04b0"
+        },
+        {
+          "bundle_offset": 2931041,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-12/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 602781,
+          "sha256": "89404709ccfb2c50f0010888a182eac6ab9aac643d18d0dfd2e92fc43113baa1"
+        },
+        {
+          "bundle_offset": 3533822,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-12/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 460750,
+          "sha256": "7de6c95b9394a4abe48d4e3b833a9c23fb576449e371c67b0c880b53ad454f88"
+        },
+        {
+          "bundle_offset": 3994572,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-12/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1261695,
+          "sha256": "dd11cb09dcef6cc53347d026946b0941c38c0b16014de0b414b2d3e6420d9a5b"
+        },
+        {
+          "bundle_offset": 5256267,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-12/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 929675,
+          "sha256": "f1a3cbeaaede77fe51f16ad76ca133871f6f1e653b1662965084616b2f767aed"
+        },
+        {
+          "bundle_offset": 6185942,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-12/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 773231,
+          "sha256": "6d87b3ef3a2990528149ac7290d4940bc9f3e54f28fee0d5996d1295dfab52dd"
+        },
+        {
+          "bundle_offset": 6959173,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-12/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 691549,
+          "sha256": "4e189aa2e5c168aec37741d8b92909448567ae6d30039e9d91cc0721c1473c7e"
+        },
+        {
+          "bundle_offset": 7650722,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-12/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 705146,
+          "sha256": "6a86a56a5562d999bc133f580801863b560642e12196a650aab9da27b9772e17"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-12/videos.bin",
+        "bytes": 8355868,
+        "sha256": "187f51e222b42b644f8483c5fe32d878f66c2297575b9605b2e0ef63bb56ebff"
+      }
+    },
+    {
+      "case": 13,
+      "benchmark_case": 61,
+      "prompt": "The woman with shoulder-length wavy brown hair, dressed in a rust-colored sweater, holds a jar of HOIVG-Bench Organic Formula in a neutral indoor setting. The product is regular-size, suitable for multiple uses. She actively presents the jar to the camera, speaking animatedly while making expressive hand gestures such as pointing, thumbs-up, and emphasizing the jar's features.",
+      "person_reference": "media/qualitative/case-13/person.png",
+      "product_reference": "media/qualitative/case-13/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-13/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1073743,
+          "sha256": "138f3a831f2ffc3545995fc801cd63bfbd0c976faa538dee2f1211a59f9b1833"
+        },
+        {
+          "bundle_offset": 1073743,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-13/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1148702,
+          "sha256": "a971c302ce8d71515914decbac76e25e9fbeb7b02ea0617bc683736f6a661c19"
+        },
+        {
+          "bundle_offset": 2222445,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-13/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1037203,
+          "sha256": "9fcab44b89dca635274e8a50419b41f8f08b885c75aeaf6dbeda2227c67e6bad"
+        },
+        {
+          "bundle_offset": 3259648,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-13/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 485670,
+          "sha256": "36fd3d4bfb7d76ef630a7ea3156e356e042ffd9c482e88f3b8b96473433ba879"
+        },
+        {
+          "bundle_offset": 3745318,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-13/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 905706,
+          "sha256": "775a11e5b81ccf408f9927b26efe6fe586389ce6c4318425a17938dd7b92772c"
+        },
+        {
+          "bundle_offset": 4651024,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-13/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 810721,
+          "sha256": "9563663dae8205e918ced7da1b693c222fba8b915c3c0f60ea453c08e5077bd5"
+        },
+        {
+          "bundle_offset": 5461745,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-13/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 952198,
+          "sha256": "56b2dfdf069a813bfc3ea536f7042e90ced81247675ad8d6649eef98bed60854"
+        },
+        {
+          "bundle_offset": 6413943,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-13/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 590206,
+          "sha256": "ef9634eeee994a68f3e7c488a272a3c301989547ff13e1d6bcd90d2c7a874338"
+        },
+        {
+          "bundle_offset": 7004149,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-13/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 536738,
+          "sha256": "f0efb9d6bb90c723fe9d71f0f769b6f7c530d0ace9088b965e3a4bd554208200"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-13/videos.bin",
+        "bytes": 7540887,
+        "sha256": "e20e38de4b338b303db9286a1b5108a6da44057a72da9be533117d32f1001fa4"
+      }
+    },
+    {
+      "case": 14,
+      "benchmark_case": 69,
+      "prompt": "The woman with her hair pulled back is holding a green and gold bottle of HOIVG-Bench Daily Revitalizer in a neutral indoor setting. The product is small-size, fitting comfortably in one hand. She is speaking directly to the camera, using one hand to hold the bottle while the other gestures expressively to emphasize her points about the product.",
+      "person_reference": "media/qualitative/case-14/person.png",
+      "product_reference": "media/qualitative/case-14/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-14/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 493971,
+          "sha256": "0093212b442801dae14f640a74b7425c50988816b0b30f53b25211487086559d"
+        },
+        {
+          "bundle_offset": 493971,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-14/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 328855,
+          "sha256": "02f8a9062fdc865a4de7361d1e332f6f1a97d005c0a743b2bac21c793df61a42"
+        },
+        {
+          "bundle_offset": 822826,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-14/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 391464,
+          "sha256": "35638db5ab5f9af24f8725456067b426b5ff1fce737122916b1728be894f2ff4"
+        },
+        {
+          "bundle_offset": 1214290,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-14/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 163500,
+          "sha256": "189b0b3ffb115fcd2e79f30b234188b0c6c3f9ab00fb2e1faef04e601870e40d"
+        },
+        {
+          "bundle_offset": 1377790,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-14/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 440027,
+          "sha256": "44cec70fdf58bd962fef21933acc71e6531753c4e87beb9b1f22aae45daad4d5"
+        },
+        {
+          "bundle_offset": 1817817,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-14/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 446164,
+          "sha256": "0973960289a10f15d0d818c95ba802e1cd26d7ba55a51412b36a16d416a04a14"
+        },
+        {
+          "bundle_offset": 2263981,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-14/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 392898,
+          "sha256": "f2f48247dd7fdee8b3f0cb2fbe4a355bf65c6adbab640aad971f0e8e4b1440da"
+        },
+        {
+          "bundle_offset": 2656879,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-14/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 329545,
+          "sha256": "9b596b8e196a8d359b1e1fbfd38e8e3980aaa8fa2c7ea446686c3af2ec0b4bbf"
+        },
+        {
+          "bundle_offset": 2986424,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-14/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 159867,
+          "sha256": "6a60627eba2a5eee43786ff1a100e20ebb66eb83b108358910bd2a8bc169cc2b"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-14/videos.bin",
+        "bytes": 3146291,
+        "sha256": "cb662ad8c5b115aa3b51f08efee2ddc81cc0bd8f10f05af640ff563a3be5ffc4"
+      }
+    },
+    {
+      "case": 15,
+      "benchmark_case": 70,
+      "prompt": "The woman with long, wavy blonde hair is holding a green bottle with a metallic bronze cap, standing indoors against a softly lit background. The bottle is regular-size, typical for a hair or skincare product. She presents the bottle to the camera with one hand, gesturing expressively as she speaks, highlighting the product鈥檚 features and benefits.",
+      "person_reference": "media/qualitative/case-15/person.png",
+      "product_reference": "media/qualitative/case-15/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-15/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 692955,
+          "sha256": "7dd3a90b83164bef4571645b3f920ca70cdf8425b41fe0caf436e6dd8c051dce"
+        },
+        {
+          "bundle_offset": 692955,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-15/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1056920,
+          "sha256": "044ada8f4b778dc4142c86b63a056a609208fe2e080c1fa59c0498c78d85c57c"
+        },
+        {
+          "bundle_offset": 1749875,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-15/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 607566,
+          "sha256": "c35c26002776ca438cd4075920cc4595c9b906753a830513f6faa454a8528134"
+        },
+        {
+          "bundle_offset": 2357441,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-15/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 313278,
+          "sha256": "324d8eb74ccf3ae071ebdde587474e61bb3a5cb0d8dd7a2fd62b2581bc22a584"
+        },
+        {
+          "bundle_offset": 2670719,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-15/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 809032,
+          "sha256": "ee3d2cccb7c516b0e37e12b7a8facf7faeacb99b6572a5735bcb3cde4fb46c9d"
+        },
+        {
+          "bundle_offset": 3479751,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-15/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 663555,
+          "sha256": "1acaa0f9f2adf774a7cf1c2660335956e77144eb94e4045a88dfa70cde9da839"
+        },
+        {
+          "bundle_offset": 4143306,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-15/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 725643,
+          "sha256": "5a2c126038cf25a1def8f675ddae8c42b0e15e5efc8660974320877c5f375161"
+        },
+        {
+          "bundle_offset": 4868949,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-15/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 548439,
+          "sha256": "3c2fbc614e1f593c406affeb1ce39fc52c0a6ab0a42d49ca6048767205df8938"
+        },
+        {
+          "bundle_offset": 5417388,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-15/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 365819,
+          "sha256": "915e1443ac6fb8686c7642293e1c2c0dee4c2b1f21f8ef8e955f80d1efae8fc3"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-15/videos.bin",
+        "bytes": 5783207,
+        "sha256": "dca362f0ff687e98a635e077395182585f1dafae067335297affc4d69d78171d"
+      }
+    },
+    {
+      "case": 16,
+      "benchmark_case": 73,
+      "prompt": "The young woman with long dark hair, wearing a rust-colored ribbed sweater and jeans, holds a dark blue jar with a bright green lid in a clean, white studio setting. The product is small-size, comfortably fitting in one hand. She gestures expressively with her free hand while speaking directly to the camera, showcasing and explaining the benefits of the jar.",
+      "person_reference": "media/qualitative/case-16/person.png",
+      "product_reference": "media/qualitative/case-16/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-16/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 640492,
+          "sha256": "cfb0a8e1e209223770f5997f40d6701abfe892df3950fd36f8f2b8d89765ae4f"
+        },
+        {
+          "bundle_offset": 640492,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-16/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 770612,
+          "sha256": "2007f6cc67a1efac2c62e0c5296aa17bce74377fa18b7827b04711893ec1bedb"
+        },
+        {
+          "bundle_offset": 1411104,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-16/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 600896,
+          "sha256": "14de1ed86a962c21c229ee221ee2e984b2ce27e5aab54812225fd8c6522b9427"
+        },
+        {
+          "bundle_offset": 2012000,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-16/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 259960,
+          "sha256": "264aed4548a5a5af3eb1f6ccf26f1419c1edcc21c3e59097ccdd39132cbe9050"
+        },
+        {
+          "bundle_offset": 2271960,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-16/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 696862,
+          "sha256": "9f091deea58b438762e92c8df0195831ef1d9aa64ff8b9ed18194c1fc0abda59"
+        },
+        {
+          "bundle_offset": 2968822,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-16/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 580136,
+          "sha256": "a784c20202a701c22d68dced4b86341041f0c746ff3c0416ea530187b0031960"
+        },
+        {
+          "bundle_offset": 3548958,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-16/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 629901,
+          "sha256": "803635d7fd5e4bc189b420dfa7cb8ede61e2b775950faa1f21a873d1088cce3e"
+        },
+        {
+          "bundle_offset": 4178859,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-16/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 449741,
+          "sha256": "cc9d51d346ebb39ba0d7a9bcfbb69f81493e100e6156a93a64036b4471bd7f70"
+        },
+        {
+          "bundle_offset": 4628600,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-16/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 390654,
+          "sha256": "decf96633da1931871b3e08d19d84a8ffdf7aa2b202c000cddb4f39e4297682d"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-16/videos.bin",
+        "bytes": 5019254,
+        "sha256": "3cf31bc55b6d65a8eedeb8ef972cf84a932aac585fca10c0b5650a0996a6df88"
+      }
+    },
+    {
+      "case": 17,
+      "benchmark_case": 85,
+      "prompt": "The young woman with shoulder-length curly brown hair, wearing a color-blocked sweater in rust orange, mustard yellow, and cream, is holding a small jar of HOIVG-Bench Body Sculpting Cream against a plain, neutral background. The product is small-size, designed to be comfortably held in one hand. She speaks directly to the camera while gesturing expressively with her free hand, highlighting the cream and its benefits.",
+      "person_reference": "media/qualitative/case-17/person.png",
+      "product_reference": "media/qualitative/case-17/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-17/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 660498,
+          "sha256": "f6d28c2cb956ebc7cf2343d4567d93fef7c6e14f9faa960f50d295466acfecdb"
+        },
+        {
+          "bundle_offset": 660498,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-17/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 928850,
+          "sha256": "4e4083788455e8afef94feac44dc1cded89f1a81b66779815b6cf98b975fdcb9"
+        },
+        {
+          "bundle_offset": 1589348,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-17/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 629009,
+          "sha256": "fae80b0a2c6843e68d31f3b2bff98fff7d9a47ddb41e7f705f53e0378ed691cf"
+        },
+        {
+          "bundle_offset": 2218357,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-17/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 269553,
+          "sha256": "3fd52e036a5f38f1de64695d28506d43ebcbb812a099020cb8db2a76a85b5a4a"
+        },
+        {
+          "bundle_offset": 2487910,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-17/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 616873,
+          "sha256": "6f1ef889bbf885be3fd1c91b6b91698fa2abb65930a1070781e3b1e68de59d8b"
+        },
+        {
+          "bundle_offset": 3104783,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-17/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 612899,
+          "sha256": "4663fca13eef5b0b0da1c1e1b54753a15604c4cfd4a6ef7e87217d0d1d11f37b"
+        },
+        {
+          "bundle_offset": 3717682,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-17/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 624700,
+          "sha256": "46cf7a28af1d4a919837290f65573dfdedb49340e3336c2944cb365ff3203339"
+        },
+        {
+          "bundle_offset": 4342382,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-17/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 416396,
+          "sha256": "3e26ca654e09417690e1641f9ce11e209fa339a46ac71e943eca10b28d75850b"
+        },
+        {
+          "bundle_offset": 4758778,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-17/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 431659,
+          "sha256": "ffcda06be4d2fcf32f371b2f28c6da17f3586784fd7c9f4fcfe1edadea3bcc4e"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-17/videos.bin",
+        "bytes": 5190437,
+        "sha256": "d48d1731e6a55b5b73370c760ea034c1fe798642194ad918eac03ef6c82712bc"
+      }
+    },
+    {
+      "case": 18,
+      "benchmark_case": 106,
+      "prompt": "The young woman with short, dark, wavy hair holds a green hair styling brush against a softly lit wall with pink and beige tones. The product is a regular-size hair straightening brush designed for easy handling and styling. She demonstrates the brush near her hair, speaking animatedly to the camera while using expressive hand gestures to emphasize her points.",
+      "person_reference": "media/qualitative/case-18/person.png",
+      "product_reference": "media/qualitative/case-18/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-18/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1263796,
+          "sha256": "f9fc9879089560661990d0c6da61b994ce56dc3e5e3e2a7b299388c816f1a918"
+        },
+        {
+          "bundle_offset": 1263796,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-18/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1709891,
+          "sha256": "402359e46767122e3cc001ea35a588fc9d7f95ed1d2f2bd4c8a3bda8d5ff8529"
+        },
+        {
+          "bundle_offset": 2973687,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-18/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1037163,
+          "sha256": "306bfd7f2892d92abd48c546268f80da5cd4aa67d4cf7a97123ba8068dcf0bd4"
+        },
+        {
+          "bundle_offset": 4010850,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-18/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 475484,
+          "sha256": "548194dd7a0bb137919f8906830ca20a4cc6ecb2ace2d1633db78d5994d5386c"
+        },
+        {
+          "bundle_offset": 4486334,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-18/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 891899,
+          "sha256": "c496a7c019a06b40d1b59c07498e3385168268453c1fe7966f1013b7bf81ad7b"
+        },
+        {
+          "bundle_offset": 5378233,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-18/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 845577,
+          "sha256": "e4651dcec5e18dc9a18693059a847b990c72df6db0171f7746ea4e8022df8b55"
+        },
+        {
+          "bundle_offset": 6223810,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-18/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1045584,
+          "sha256": "513e5cf4a6cfe074ac43e1d525be1ce35a64462808acc1e29bb2246aa781ec4b"
+        },
+        {
+          "bundle_offset": 7269394,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-18/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 592547,
+          "sha256": "1822456680236e4cb74f002167a2c9841d1b56c87f8a83710e1ea1f82dd10556"
+        },
+        {
+          "bundle_offset": 7861941,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-18/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 673191,
+          "sha256": "92ce43460ca00f351ee437bc72b45c9fd9fb896fc37372c5b98c20778d8305d3"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-18/videos.bin",
+        "bytes": 8535132,
+        "sha256": "db122e56d312ec3d607738f0d0d905a8eb76d751d01ad2be5ab43730ee785af2"
+      }
+    },
+    {
+      "case": 19,
+      "benchmark_case": 122,
+      "prompt": "The young woman in a denim shirt holds a black and gold tube of HOIVG-Bench skincare product in a room with shelves filled with beauty items and purple ambient lighting. The product is regular-size, weighing 500g, suitable for extended use. She is applying the product while speaking directly to the camera, using expressive hand gestures to emphasize her points.",
+      "person_reference": "media/qualitative/case-19/person.png",
+      "product_reference": "media/qualitative/case-19/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-19/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 931780,
+          "sha256": "107167170a88884034210b6770e275332a1d1a5bf15a9055860bf133afca84b6"
+        },
+        {
+          "bundle_offset": 931780,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-19/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 821287,
+          "sha256": "2a91549cd47002171a4d984959bbd3ad707abc47573e94e5f15ca26cfa334fa7"
+        },
+        {
+          "bundle_offset": 1753067,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-19/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 773266,
+          "sha256": "1d98eba81040f8410f423ab2e881e5f3603825fb8ab75a202c0e78c3e0a393f4"
+        },
+        {
+          "bundle_offset": 2526333,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-19/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 328692,
+          "sha256": "d15e51c5056c0427a0858dc496d87428a0f666accd1c1c1edf1735c080d00393"
+        },
+        {
+          "bundle_offset": 2855025,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-19/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 675809,
+          "sha256": "69badfbd93afc3e14233e67f9b7f8c78b64bdf761a56a523885f1ca4ea4847b2"
+        },
+        {
+          "bundle_offset": 3530834,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-19/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 598305,
+          "sha256": "f5c98c33cae526aafecd7261e283f21f5f1e74ca4e926902a99bf705c910d870"
+        },
+        {
+          "bundle_offset": 4129139,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-19/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 762098,
+          "sha256": "edb6097b778092d57f4ee3d2eaabc8dcdf5c847f38a2b7873398788593aecc01"
+        },
+        {
+          "bundle_offset": 4891237,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-19/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 442319,
+          "sha256": "2a305b8a83b6c80a9739524e75dd2000081d57ffa8a33c24055e9f717689c859"
+        },
+        {
+          "bundle_offset": 5333556,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-19/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 361648,
+          "sha256": "86367d0a6a1af4a8e84b9f6286cfad16bbaa0019817d92ea87f049d7c55d5bfe"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-19/videos.bin",
+        "bytes": 5695204,
+        "sha256": "b85c2ab074c2752670ca7a0ffc42643440db15dc45d39c3951bffbead55edcd8"
+      }
+    },
+    {
+      "case": 20,
+      "benchmark_case": 134,
+      "prompt": "The woman with medium-length wavy light brown hair wearing an orange sweater is standing in front of a plain background, holding a dark green bottle of HOIVG-Bench Skincare Serum. The bottle is small-size, easily fitting in one hand with a sleek design. She is holding the serum up and speaking directly to the camera, using expressive hand gestures to emphasize the product's features and benefits.",
+      "person_reference": "media/qualitative/case-20/person.png",
+      "product_reference": "media/qualitative/case-20/product.png",
+      "videos": [
+        {
+          "bundle_offset": 0,
+          "method": "Phantom",
+          "steps": 50,
+          "file": "media/qualitative/case-20/phantom.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 641217,
+          "sha256": "269b7036218267d78ed16575afc5b4f5d287eac4f92c5e3204b0a598e0977159"
+        },
+        {
+          "bundle_offset": 641217,
+          "method": "VACE",
+          "steps": 50,
+          "file": "media/qualitative/case-20/vace.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 1072829,
+          "sha256": "f70d305a08d6f806bf1206a45cc7bb729431ecf7fd6e8f7e7eb0fd46c3957644"
+        },
+        {
+          "bundle_offset": 1714046,
+          "method": "HuMo",
+          "steps": 50,
+          "file": "media/qualitative/case-20/humo.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 612316,
+          "sha256": "a2b5ceeca0df110579b9f31a59bd41dffc93973c8b6ef646d5ab28aa43908cac"
+        },
+        {
+          "bundle_offset": 2326362,
+          "method": "CoInteract",
+          "steps": 40,
+          "file": "media/qualitative/case-20/cointeract.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 254125,
+          "sha256": "c58ffea3033f660119d2f5e4b8587e21b3254a4de1d0f8d5888bbecde3305826"
+        },
+        {
+          "bundle_offset": 2580487,
+          "method": "LiveAvatar",
+          "steps": 4,
+          "file": "media/qualitative/case-20/liveavatar.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 583836,
+          "sha256": "91a3da65d5e008a40ca64685c4db69a34f5fb24d4d7330e04c61b1a30895d73a"
+        },
+        {
+          "bundle_offset": 3164323,
+          "method": "FlashTalk",
+          "steps": 4,
+          "file": "media/qualitative/case-20/flashtalk.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 551030,
+          "sha256": "10487a7a28b61c518949cfb06b4a3025dea86f8aabac685ba101b3b6b1530baf"
+        },
+        {
+          "bundle_offset": 3715353,
+          "method": "SkyReels-V3",
+          "steps": 8,
+          "file": "media/qualitative/case-20/skyreels-v3.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 607061,
+          "sha256": "2272fca2ca105c82449394a8e8df34202ab24a1a6c6c47c208a238a2e6d24488"
+        },
+        {
+          "bundle_offset": 4322414,
+          "method": "LongCat-Video-Avatar 1.5",
+          "steps": 8,
+          "file": "media/qualitative/case-20/longcat.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 370184,
+          "sha256": "2a690780117ed70fd717da2a0f419abf581196f5c35a5d19b7fcace836466602"
+        },
+        {
+          "bundle_offset": 4692598,
+          "method": "Ours (Student)",
+          "steps": 4,
+          "file": "media/qualitative/case-20/ours.mp4",
+          "duration_seconds": 3.2,
+          "dimensions": [
+            480,
+            832
+          ],
+          "bytes": 336001,
+          "sha256": "8c02a1de3b0dc10e18bb9527ad90fc2e08a16d8806fffdf0e9d2d47079a01164"
+        }
+      ],
+      "bundle": {
+        "file": "media/qualitative/case-20/videos.bin",
+        "bytes": 5028599,
+        "sha256": "b0bb03b0a67a15cd31fddb7c38a00447fc2a5e9cead781b3023555c34bc467eb"
+      }
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "action_profile",
+    "judgments"
+  ],
+  "properties": {
+    "action_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_object",
+        "expected_object_count",
+        "main_action",
+        "defining_event",
+        "required_final_state",
+        "actor_body_parts",
+        "handedness",
+        "required_hand_count",
+        "ordered_subactions",
+        "sustained_contact_required",
+        "gravity_support_required",
+        "functional_relation",
+        "release_or_placement_expected",
+        "direction",
+        "rigid_object_expected"
+      ],
+      "properties": {
+        "target_object": {
+          "type": "string"
+        },
+        "expected_object_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 10
+        },
+        "main_action": {
+          "type": "string"
+        },
+        "defining_event": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "required_final_state": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "actor_body_parts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "handedness": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right",
+            "both",
+            "unspecified"
+          ]
+        },
+        "required_hand_count": {
+          "type": "integer",
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "ordered_subactions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sustained_contact_required": {
+          "type": "boolean"
+        },
+        "gravity_support_required": {
+          "type": "boolean"
+        },
+        "functional_relation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "release_or_placement_expected": {
+          "type": "boolean"
+        },
+        "direction": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rigid_object_expected": {
+          "type": "boolean"
+        }
+      }
+    },
+    "judgments": {
+      "type": "array",
+      "minItems": 50,
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "question_id",
+          "applicable",
+          "reason_zh",
+          "reason_en"
+        ],
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "enum": [
+              "C01",
+              "C02",
+              "C03",
+              "C04",
+              "C05",
+              "C06",
+              "C07",
+              "C08",
+              "C09",
+              "C10",
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12",
+              "S13",
+              "S14",
+              "S15",
+              "S16",
+              "M01",
+              "M02",
+              "M03",
+              "M04",
+              "M05",
+              "M06",
+              "M07",
+              "M08",
+              "M09",
+              "M10",
+              "M11",
+              "M12",
+              "A01",
+              "A02",
+              "A03",
+              "A04",
+              "A05",
+              "A06",
+              "A07",
+              "A08",
+              "A09",
+              "A10",
+              "A11",
+              "A12"
+            ]
+          },
+          "applicable": {
+            "type": "boolean"
+          },
+          "reason_zh": {
+            "type": "string"
+          },
+          "reason_en": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

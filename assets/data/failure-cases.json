@@ -1,0 +1,46 @@
+[
+  {
+    "case": 65,
+    "failure_type": "Failure to establish product interactions beyond the hands",
+    "analysis": "The generated video fails to curl the hair.",
+    "person_reference": "media/failures/case-065/person.png",
+    "product_reference": "media/failures/case-065/product.png",
+    "video": "media/failures/case-065/ours.mp4",
+    "bytes": 375310,
+    "sha256": "1f917a3ca7c85c8c1f17ade41296f355465edf9f67ad9f29f901a6425cebbcfa",
+    "prompt": "The young woman with shoulder-length blonde hair is holding a rose gold curling iron in a bathroom with a patterned shower curtain in the background. The curling iron is regular-size, typical for hairstyling tools. She clamps a section of her hair near the scalp, wraps the strand around the barrel, and pulls the tool away to reveal a curl, all while speaking animatedly to the camera and using expressive hand gestures to emphasize her points."
+  },
+  {
+    "case": 79,
+    "failure_type": "Failure to establish product interactions beyond the hands",
+    "analysis": "The generated video fails to blend makeup using the makeup brush.",
+    "person_reference": "media/failures/case-079/person.png",
+    "product_reference": "media/failures/case-079/product.png",
+    "video": "media/failures/case-079/ours.mp4",
+    "bytes": 451230,
+    "sha256": "9f74072cd653bf388671ffeafc4ebaaf5fd1c024ab7ba9159ee661a324ddebf7",
+    "prompt": "The young woman with long wavy blonde hair holds a precision blender makeup brush in front of a warm, two-tone orange and red background. The brush is very small-size, fitting easily in the palm with its sleek green handle and gold ferrule. She skillfully gestures with the brush while explaining how to blend makeup flawlessly, engaging the camera with confident and expressive hand movements."
+  },
+  {
+    "case": 96,
+    "failure_type": "Failure to establish product interactions beyond the hands",
+    "analysis": "The generated video fails to style the hair using the curling wand.",
+    "person_reference": "media/failures/case-096/person.png",
+    "product_reference": "media/failures/case-096/product.png",
+    "video": "media/failures/case-096/ours.mp4",
+    "bytes": 428776,
+    "sha256": "3382e280189e0c23ffef5dbb126066ce8bec6f17b92b5001423a3d6889486430",
+    "prompt": "The young woman with medium-length, dark curly hair holds a sleek blue and rose gold curling wand in a warmly lit indoor setting. The curling wand is a regular-size styling tool, designed for easy handling and precise temperature control. She demonstrates how to use the curling wand on her hair, speaking confidently to the camera while using expressive hand gestures to highlight key styling tips."
+  },
+  {
+    "case": 108,
+    "failure_type": "Failure to establish product interactions beyond the hands",
+    "analysis": "The generated video fails to wrap the hair around the brush.",
+    "person_reference": "media/failures/case-108/person.png",
+    "product_reference": "media/failures/case-108/product.png",
+    "video": "media/failures/case-108/ours.mp4",
+    "bytes": 610911,
+    "sha256": "803da66598abf1712f304220c8b1e216af5d20d6765fc8470c31c710d2ea5a18",
+    "prompt": "The young woman with long dark hair is holding a green and copper ionic heated round brush styler indoors with shelves of perfumes in the background. The brush styler is regular-size, designed to comfortably style hair with its barrel and bristles. She wraps sections of her hair around the barrel while speaking enthusiastically to the camera, using expressive hand movements to emphasize how the brush enhances her curls."
+  }
+]

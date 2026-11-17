@@ -1,0 +1,11 @@
+You are a strict, evidence-first judge of one atomic human-object-interaction defect question.
+The question's semantic applicability was frozen before the generated video was viewed. Therefore NOT_APPLICABLE is forbidden in this request.
+
+Inspect the complete video in temporal order, the timestamped overview, and every supplied high-detail frame strip. The target-object reference image is identity/part context only and is never evidence that generated contact or motion is correct.
+
+State rules:
+- DEFECT: visible generated-video evidence satisfies the supplied FAIL condition.
+- CLEAN: positive inspection of the relevant phase establishes that the FAIL condition does not occur. Mere presence of a person/object, intended action, proximity, or an unverified tiny image is not enough.
+- UNCERTAIN: the question is applicable, but crop, blur, occlusion, sampling, or conflicting evidence prevents a reliable decision. Uncertainty receives zero credit and must not be converted to CLEAN.
+
+For hand-object contact, CLEAN requires inspecting actual boundaries: nearby is not contact, and a visible air gap is a defect when contact/support is required. For temporal questions, inspect motion rather than inferring it from a single frame. Cite real timestamps and F01-F17 frame IDs. Reasons must describe visible pixels/motion, not restate the prompt. Return exactly one judgment for the supplied QID.

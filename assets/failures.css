@@ -1,0 +1,59 @@
+.failure-page .shell { max-width: 1320px; padding-left: 24px; padding-right: 24px; }
+.failure-page .header-inner { min-height: 44px; }
+.failure-page .brand { gap: 8px; }
+.failure-page .brand-mark { width: 27px; height: 27px; font-size: 14px; }
+.failure-page .brand-copy strong { font-size: 13px; }
+.failure-page .brand-copy > span { display: none; }
+.failure-page .anonymous-label { font-size: 10px; }
+.failure-heading { padding: 18px 0 12px; }
+.failure-heading h1 { font-size: 26px; line-height: 1.25; letter-spacing: -.4px; margin: 0 0 5px; }
+.failure-heading p { margin: 0; font-size: 12px; color: var(--muted); }
+.failure-controls { display: flex; align-items: center; gap: 16px; padding: 9px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.failure-play { border: 1px solid #244a35; border-radius: 6px; background: #2b573d; color: white; font-size: 15px; font-weight: 700; min-width: 140px; min-height: 44px; padding: 9px 18px; cursor: pointer; }
+.failure-play:hover:not(:disabled) { background: #20472f; }
+.failure-play:disabled { opacity: .65; cursor: default; }
+.failure-loop { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); }
+.failure-loop input { accent-color: var(--accent); }
+.failure-status { font-size: 11px; color: var(--muted); margin: 0; }
+.failure-group { margin-top: 20px; }
+.failure-group h2 { margin: 0 0 4px; font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+.failure-group > p { margin: 0 0 10px; font-size: 12px; color: var(--muted); }
+.failure-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.failure-case { background: white; border: 1px solid var(--line); border-radius: 5px; padding: 12px; min-width: 0; }
+.failure-case header { display: flex; gap: 12px; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.failure-case h3 { font-size: 13px; margin: 0; color: var(--ink); font-weight: 600; }
+.failure-case header > span { font-size: 10px; color: var(--muted); }
+.failure-media { display: grid; grid-template-columns: 1fr 1fr 1.6fr; gap: 8px; align-items: start; }
+.failure-media.no-references { grid-template-columns: minmax(0, 220px); justify-content: center; }
+.failure-media figure { margin: 0; min-width: 0; }
+.failure-media .media-frame { height: 250px; display: flex; align-items: center; justify-content: center; background: #edf0e8; border: 1px solid #e0e6d9; border-radius: 3px; overflow: hidden; }
+.failure-media a.media-frame { cursor: zoom-in; }
+.failure-media img, .failure-media video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.failure-media figcaption { text-align: center; font-size: 10px; color: var(--muted); padding-top: 4px; }
+.failure-media figcaption a { text-underline-offset: 2px; }
+.failure-analysis { margin: 10px 0 0; font-size: 12px; line-height: 1.6; color: var(--text); }
+.failure-analysis strong { color: var(--ink); }
+.failure-prompt { margin-top: 9px; border-top: 1px solid var(--line); padding-top: 7px; }
+.failure-prompt summary { font-size: 11px; color: var(--accent); cursor: pointer; }
+.failure-prompt p { margin: 6px 0 0; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.failure-dialog { border: 1px solid var(--line); border-radius: 6px; padding: 10px; max-width: 94vw; max-height: 94svh; background: var(--paper); }
+.failure-dialog::backdrop { background: #14251cd9; }
+.failure-dialog button { display: block; margin: 0 0 8px auto; border: 1px solid var(--line); border-radius: 3px; padding: 4px 10px; color: var(--accent); background: white; font-size: 12px; }
+.failure-dialog img { display: block; max-width: 86vw; max-height: 82svh; object-fit: contain; }
+.failure-video-status { display: block; color: #7b896f; font-size: 10px; margin-top: 2px; }
+.pending-media { font-size: 12px; color: var(--muted); }
+@media (max-width: 800px) {
+  .failure-page .shell { padding-left: 14px; padding-right: 14px; }
+  .failure-page .anonymous-label { display: none; }
+  .failure-grid { grid-template-columns: 1fr; }
+  .failure-controls { flex-wrap: wrap; gap: 8px 16px; }
+  .failure-status { flex-basis: 100%; }
+  .failure-heading h1 { font-size: 24px; }
+}
+@media (max-width: 440px) {
+  .failure-page .page-nav { gap: 10px; font-size: 9px; }
+  .failure-media .media-frame { height: 200px; }
+  .failure-media { gap: 5px; }
+  .failure-case { padding: 9px; }
+}
+.failure-page main.shell { padding-bottom: 24px; }

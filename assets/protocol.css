@@ -1,0 +1,84 @@
+.protocol-page .shell { max-width: 1480px; padding-left: 24px; padding-right: 24px; }
+.protocol-page .header-inner { min-height: 44px; }
+.protocol-page .brand { gap: 8px; }
+.protocol-page .brand-mark { width: 27px; height: 27px; font-size: 14px; }
+.protocol-page .brand-copy strong { font-size: 13px; }
+.protocol-page .brand-copy > span { display: none; }
+.protocol-page .anonymous-label { font-size: 10px; }
+.protocol-heading { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 20px 0 16px; border-bottom: 1px solid var(--line); }
+.protocol-heading h1 { margin: 0 0 5px; font-family: var(--sans); font-size: 25px; font-weight: 600; line-height: 1.3; letter-spacing: -.4px; }
+.protocol-heading p { margin: 0; font-size: 12px; color: var(--muted); }
+.protocol-download { flex: none; text-decoration: none; background: var(--accent); color: white; padding: 10px 14px; border-radius: 5px; font-size: 12px; font-weight: 600; }
+.protocol-download:hover { background: #244a35; }
+.protocol-layout { display: grid; grid-template-columns: 177px minmax(0, 1fr); gap: 30px; align-items: start; padding-top: 20px; }
+.protocol-index { position: sticky; top: 18px; }
+.protocol-index nav { display: grid; gap: 3px; }
+.protocol-index a { display: block; text-decoration: none; color: var(--muted); padding: 7px 0; font-size: 11px; line-height: 1.5; border-bottom: 1px solid #e8ece4; }
+.protocol-index a:hover { color: var(--accent); }
+.protocol-content { min-width: 0; }
+.protocol-content section { margin: 0 0 30px; scroll-margin-top: 16px; }
+.protocol-content h2 { margin: 0 0 12px; font-family: var(--sans); color: var(--ink); font-size: 20px; font-weight: 600; line-height: 1.4; letter-spacing: -.25px; }
+.protocol-content h3 { margin: 18px 0 8px; color: var(--ink); font-size: 14px; font-weight: 600; }
+.protocol-content p, .protocol-content li { font-size: 13px; line-height: 1.75; }
+.protocol-content p { margin: 9px 0 12px; }
+.protocol-content ol { padding-left: 21px; margin: 10px 0; }
+.protocol-content li + li { margin-top: 8px; }
+.protocol-content a { color: var(--accent); text-underline-offset: 3px; }
+.protocol-content code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
+.table-wrap { overflow-x: auto; background: white; border: 1px solid var(--line); border-radius: 4px; margin: 10px 0; }
+.protocol-content table { width: 100%; border-collapse: collapse; font-size: 12px; line-height: 1.6; }
+.protocol-content th, .protocol-content td { text-align: left; padding: 9px 11px; vertical-align: top; }
+.protocol-content thead { background: #eaf0e7; }
+.protocol-content thead th { color: var(--ink); font-size: 11px; font-weight: 600; border-bottom: 1px solid var(--line); }
+.protocol-content tbody th { font-weight: 600; color: var(--ink); }
+.protocol-content tbody tr + tr > * { border-top: 1px solid #e8ece4; }
+.protocol-content tbody tr:nth-child(even) { background: #fafbf8; }
+.protocol-content .numeric { text-align: right; font-variant-numeric: tabular-nums; }
+.protocol-content p.protocol-note { padding: 11px 13px; background: #edf1e9; border-left: 3px solid #91a287; font-size: 12px; color: #53624e; }
+.formula { border: 1px solid var(--line); border-radius: 4px; padding: 12px 14px; background: white; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; line-height: 2; }
+.formula div { white-space: nowrap; }
+.protocol-detail { border: 1px solid var(--line); border-radius: 4px; background: #fff; margin: 9px 0; }
+.protocol-detail > summary { padding: 9px 12px; color: var(--accent); font-size: 12px; font-weight: 600; cursor: pointer; }
+.protocol-detail > p, .protocol-detail > .table-wrap { margin: 3px 12px 12px; }
+.protocol-content pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #f0f3ec; color: #3e503d; padding: 13px; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; line-height: 1.65; overflow: auto; }
+.protocol-detail > pre { margin: 0; border-radius: 0 0 4px 4px; max-height: 430px; }
+.question-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.question-group { scroll-margin-top: 16px; margin: 18px 0; }
+.question-group > h3 { font-size: 15px; }
+.question-table { min-width: 850px; table-layout: fixed; }
+.question-table col:nth-child(1) { width: 7%; }
+.question-table col:nth-child(2) { width: 30%; }
+.question-table col:nth-child(3) { width: 28%; }
+.question-table col:nth-child(4) { width: 35%; }
+.question-table td { font-size: 11px; }
+.question-table .qid { font-size: 11px; font-weight: 700; color: var(--accent); }
+.critical-label { display: block; color: #87927d; font-size: 8px; font-weight: 400; margin-top: 3px; }
+.digest { overflow-wrap: anywhere; }
+@media (max-width: 1000px) {
+  .protocol-layout { grid-template-columns: 1fr; gap: 15px; }
+  .protocol-index { position: static; }
+  .protocol-index nav { display: flex; flex-wrap: wrap; gap: 3px 18px; }
+  .protocol-index a { padding: 4px 0; }
+  .protocol-page .anonymous-label { display: none; }
+}
+@media (max-width: 650px) {
+  .protocol-page .shell { padding-left: 14px; padding-right: 14px; }
+  .protocol-page .header-inner { gap: 12px; }
+  .protocol-page .page-nav { gap: 10px; font-size: 9px; }
+  .protocol-heading { align-items: flex-start; flex-direction: column; gap: 11px; padding: 15px 0; }
+  .protocol-heading h1 { font-size: 23px; }
+  .protocol-heading p { font-size: 10px; }
+  .protocol-content h2 { font-size: 18px; }
+  .protocol-content p, .protocol-content li { font-size: 12px; }
+  .protocol-content th, .protocol-content td { padding: 8px; }
+}
+@media print {
+  .protocol-page .site-header, .protocol-index, .protocol-download, .skip-link { display: none; }
+  .protocol-page .shell { padding: 0; max-width: none; }
+  .protocol-layout { display: block; }
+  .protocol-content p, .protocol-content li { font-size: 10px; }
+  .protocol-content table, .question-table td { font-size: 9px; min-width: 0; }
+  .protocol-detail > pre { max-height: none; }
+  .table-wrap { overflow: visible; }
+  .protocol-content tr { break-inside: avoid; }
+}

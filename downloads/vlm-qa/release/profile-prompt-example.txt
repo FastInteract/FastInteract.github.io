@@ -1,0 +1,177 @@
+SYSTEM
+You create a PRE-VIDEO action and applicability profile for strict human-object-interaction evaluation.
+Use only the requested text, object label, and optional target-object reference image. You must not inspect, anticipate, or adapt to any generated video.
+
+Action rules:
+- Preserve the most specific requested action verb and its defining event. Never replace applying, brushing, curling, spraying, pouring, opening, pressing, wearing, or another functional action with generic holding/displaying merely because the tool must be held.
+- Record a concrete, visually judgeable functional relation when one is needed: e.g. brush bristles contact/move across the face; hair enters or wraps around a curling wand's working region.
+- A singular target object normally means expected_object_count=1. Do not infer two objects merely because two hands are visible in a reference.
+
+Applicability rules:
+- Decide semantic applicability before any generated output exists. Set applicable=false only when the requested action makes the question genuinely irrelevant.
+- Do not use future crop, blur, occlusion, missing hands, or a bad generated trajectory to make a question inapplicable. If a semantically relevant property later cannot be observed, the video judge must answer UNCERTAIN.
+- A question that detects an unexpected contact break, unsupported release, disappearance, or duplication remains applicable whenever that failure could violate the requested action, even if the request does not ask for the failure event.
+- C02 is always applicable. Questions about the named target and its disappearance are applicable whenever a target object is specified.
+Return exactly one applicability decision for every supplied QID, in QID order.
+
+USER
+Create a frozen action/applicability profile for this requested video.
+
+Object label: bottle
+Requested prompt:
+The young woman with light brown hair pulled back stands in a brightly lit room with white walls, holding a small, light green dropper bottle labeled HOIVG-Bench. The product is a small-size bottle, compact enough to be comfortably held in one hand. She gestures expressively with her hands while demonstrating and speaking directly to the camera, showing how to use the bottle and engaging the viewer with her presentation.
+
+For each question below, decide applicability from the request only. The defect question itself is supplied so that a forbidden unexpected event is not mistakenly declared irrelevant.
+
+C01 [C] Does the person perform the primary interaction on the wrong object?
+  Applicability code: target_object_specified
+  Pre-video condition: The action specification or conditioning input identifies a target object.
+C02 [C] Does the required primary interaction action fail to start at all?
+  Applicability code: always
+  Pre-video condition: Every video with a target HOI action.
+C03 [C] Does the person only approach or pose without reaching the action's defining interaction event?
+  Applicability code: defining_event_available
+  Pre-video condition: The action has a defining event such as grasping, wearing, opening, lifting, or placing.
+C04 [C] Does the object fail to reach the final state required by the action specification?
+  Applicability code: final_state_specified
+  Pre-video condition: The action specification defines an observable final state.
+C05 [C] Is the body part performing the primary action inconsistent with the action specification?
+  Applicability code: body_part_specified
+  Pre-video condition: The action explicitly or inherently requires a particular body part.
+C06 [C] Is the left or right hand used for the action inconsistent with the action specification?
+  Applicability code: handedness_specified
+  Pre-video condition: The action specification explicitly states left or right hand.
+C07 [C] Is the number of hands participating in the primary action inconsistent with the action specification?
+  Applicability code: hand_count_specified
+  Pre-video condition: The action explicitly or inherently requires one hand or two hands.
+C08 [C] Do the required sub-actions occur in the wrong order?
+  Applicability code: ordered_multi_step_action
+  Pre-video condition: The action contains two or more sub-actions with a required order.
+C09 [C] Is the object's motion direction opposite to the direction specified by the action?
+  Applicability code: direction_specified
+  Pre-video condition: The action specifies a direction such as up, down, left, right, clockwise, or counterclockwise.
+C10 [C] Is a required sustained action state lost before the specified phase ends?
+  Applicability code: sustained_state_required
+  Pre-video condition: The action requires holding, wearing, supporting, or maintaining an object state for a period.
+S01 [S] During a phase that requires contact, does the specified body part never contact the target object?
+  Applicability code: contact_required
+  Pre-video condition: The action contains a phase that requires body-object contact.
+S02 [S] While contact must be maintained, is there a clear air gap between the hand and the object surface?
+  Applicability code: sustained_hand_contact
+  Pre-video condition: The hand must remain in contact during a key phase and the contact region is visible.
+S03 [S] When hand or body support is required, does the object float without any visible support?
+  Applicability code: gravity_support_required
+  Pre-video condition: The object should not self-float and the phase requires a hand, body part, or visible surface to oppose gravity.
+S04 [S] Does the object translate or rotate as if controlled by the hand while clearly detached from it?
+  Applicability code: hand_controlled_motion_expected
+  Pre-video condition: The object's motion should be caused by the hand grasping, pushing, pulling, or supporting it.
+S05 [S] Does required contact break unexpectedly before the action is complete?
+  Applicability code: contact_until_completion_required
+  Pre-video condition: The action requires continuous contact from contact establishment until completion.
+S06 [S] Does the hand or a finger visibly penetrate into the solid interior of the target object?
+  Applicability code: hand_object_boundary_visible
+  Pre-video condition: The hand-object boundary is visible at one or more key moments.
+S07 [S] Does the target object visibly penetrate an unintended body region?
+  Applicability code: object_near_body
+  Pre-video condition: The target object approaches the torso, arm, leg, or another body region not intended for contact.
+S08 [S] Do the hand and object fuse into an inseparable single structure at the contact region?
+  Applicability code: contact_boundary_visible
+  Pre-video condition: The hand-object contact boundary is visible at one or more key moments.
+S09 [S] Is the actual contact located on an object region unsuitable for completing the specified action?
+  Applicability code: functional_contact_region_exists
+  Pre-video condition: The action requires contact with a particular functional part or manipulable region.
+S10 [S] Is the current grasp or support contact insufficient to oppose the object's gravity?
+  Applicability code: object_supported_against_gravity
+  Pre-video condition: The person is grasping, supporting, or suspending an object affected by gravity.
+S11 [S] Is the finger-contact distribution incapable of forming the grasp type required by the action?
+  Applicability code: finger_grasp_required
+  Pre-video condition: The action requires visible fingers to grasp, pinch, clamp, or wrap around the object.
+S12 [S] After placement is complete, does the object fail to contact the intended supporting surface?
+  Applicability code: placement_on_surface
+  Pre-video condition: The action requires placing the object on a table, floor, container, or another support surface.
+S13 [S] Is the front-back occlusion order at the hand-object boundary inconsistent with their spatial positions?
+  Applicability code: partial_hand_object_occlusion
+  Pre-video condition: The hand and object partially occlude one another during a key phase.
+S14 [S] During continuous contact, does the contact point jump to another object location without a geometric cause?
+  Applicability code: continuous_contact_visible
+  Pre-video condition: Contact is maintained and visible across consecutive frames.
+S15 [S] Does the target object undergo an obvious solid collision with an unintended body part?
+  Applicability code: object_approaches_unintended_body_part
+  Pre-video condition: The target object's trajectory approaches a body part not intended for interaction.
+S16 [S] After release, does the object remain suspended without a new support?
+  Applicability code: release_without_new_support
+  Pre-video condition: The person releases the object and it is not caught by another hand, body part, or surface.
+M01 [M] Does the object begin controlled motion before control contact is established?
+  Applicability code: contact_then_manipulation
+  Pre-video condition: The hand should establish contact before pushing, pulling, grasping, or lifting the object.
+M02 [M] After contact breaks, does the object continue copying the hand's controlled motion?
+  Applicability code: visible_contact_break_during_motion
+  Pre-video condition: A clear hand-object contact break is observable during motion.
+M03 [M] During a stable hold, does the object's translation visibly lag behind the holding hand?
+  Applicability code: stable_hold_with_translation
+  Pre-video condition: The hand stably holds the object while visible translation occurs.
+M04 [M] During a stable hold, does the object move without corresponding motion of the holding hand?
+  Applicability code: stable_hold_visible
+  Pre-video condition: The hand and object are in a stable hold and both motions are observable.
+M05 [M] During a stable grasp, does the object slip unexpectedly relative to the palm?
+  Applicability code: stable_grasp_without_slip_action
+  Pre-video condition: The action requires a stable grasp and does not call for deliberate sliding or regrasping.
+M06 [M] Does the object jitter independently without the motion propagating to the contacting hand?
+  Applicability code: contact_during_visible_motion
+  Pre-video condition: The hand and object remain in contact and temporal resolution is sufficient to observe short motions.
+M07 [M] Does the target object's position teleport between adjacent moments in a way its velocity cannot explain?
+  Applicability code: object_track_observable
+  Pre-video condition: The target object is identifiable before and after the jump, or its track can be reliably matched across a brief occlusion.
+M08 [M] Does the target object's orientation flip discontinuously between adjacent moments without a cause?
+  Applicability code: object_orientation_observable
+  Pre-video condition: The object's appearance or geometry supports tracking its orientation continuously.
+M09 [M] Does new hand-object contact appear suddenly without the hand approaching the object?
+  Applicability code: contact_establishment_visible
+  Pre-video condition: The video contains a visible transition from separation to contact.
+M10 [M] After release, is the object's gravity response implausibly delayed?
+  Applicability code: unsupported_release_with_observable_aftermath
+  Pre-video condition: The object has no new support after release and enough post-release video is available.
+M11 [M] Does the interaction state suddenly reset to an earlier state without a cause?
+  Applicability code: multi_phase_action
+  Pre-video condition: The action progresses through two or more temporally distinguishable states.
+M12 [M] After a brief occlusion, does the hand-object relation jump to a state incompatible with the pre-occlusion motion?
+  Applicability code: brief_occlusion_with_track_recovery
+  Pre-video condition: The hand-object relation undergoes a brief occlusion and can be reliably identified before and after it.
+A01 [A] Does a visible interacting hand have a clearly incorrect number of fingers?
+  Applicability code: interacting_fingers_countable
+  Pre-video condition: The interacting fingers are clear enough at one or more key moments to assess their count.
+A02 [A] Do two or more fingers merge non-anatomically into one structure?
+  Applicability code: interacting_fingers_visible
+  Pre-video condition: Finger contours of the interacting hand are visible at one or more key moments.
+A03 [A] Does an interacting finger joint bend in a biomechanically impossible direction?
+  Applicability code: finger_joint_pose_visible
+  Pre-video condition: At least one interacting finger joint pose is sufficiently visible.
+A04 [A] Does an interacting wrist disconnect from its corresponding forearm?
+  Applicability code: wrist_forearm_region_visible
+  Pre-video condition: The wrist-forearm connection on the interacting side is visible at one or more key moments.
+A05 [A] Does an extra hand appear from nowhere during the interaction?
+  Applicability code: upper_body_hands_observable
+  Pre-video condition: Enough of the upper body is visible to distinguish the person's existing two hands.
+A06 [A] Does an interacting hand disappear when it should be visible and is not occluded?
+  Applicability code: interacting_hand_expected_visible
+  Pre-video condition: Based on its trajectory, the interacting hand should be in frame and is not occluded by an object or the body.
+A07 [A] Does the interacting arm length change abruptly in a way perspective cannot explain?
+  Applicability code: interacting_arm_track_visible
+  Pre-video condition: Enough shoulder, elbow, and wrist landmarks on the interacting side are visible over time.
+A08 [A] Does the interacting hand collapse into an unrecognizable structure?
+  Applicability code: interacting_hand_visible
+  Pre-video condition: The interacting hand is visible at one or more key moments.
+A09 [A] Does the target object disappear without being fully occluded or leaving the frame?
+  Applicability code: target_object_expected_visible
+  Pre-video condition: Based on its trajectory, the target object should remain in frame and is not fully occluded.
+A10 [A] Does a second copy of the target object appear without cause during the interaction?
+  Applicability code: single_target_object_expected
+  Pre-video condition: The input and action specification contain only one target object.
+A11 [A] Does a rigid target object's geometry deform without the action requiring deformation?
+  Applicability code: rigid_object_or_shape_should_remain_stable
+  Pre-video condition: The target is rigid, or the current action should not change its global shape.
+A12 [A] Does the target object's scale jump between adjacent moments in a way depth change cannot explain?
+  Applicability code: object_scale_trackable
+  Pre-video condition: The target object is trackable over time and camera or object depth change can be assessed.
+
+Return action_profile plus all 50 applicability judgments.

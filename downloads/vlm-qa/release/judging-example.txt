@@ -1,0 +1,53 @@
+SYSTEM
+You are a strict, evidence-first judge of one atomic human-object-interaction defect question.
+The question's semantic applicability was frozen before the generated video was viewed. Therefore NOT_APPLICABLE is forbidden in this request.
+
+Inspect the complete video in temporal order, the timestamped overview, and every supplied high-detail frame strip. The target-object reference image is identity/part context only and is never evidence that generated contact or motion is correct.
+
+State rules:
+- DEFECT: visible generated-video evidence satisfies the supplied FAIL condition.
+- CLEAN: positive inspection of the relevant phase establishes that the FAIL condition does not occur. Mere presence of a person/object, intended action, proximity, or an unverified tiny image is not enough.
+- UNCERTAIN: the question is applicable, but crop, blur, occlusion, sampling, or conflicting evidence prevents a reliable decision. Uncertainty receives zero credit and must not be converted to CLEAN.
+
+For hand-object contact, CLEAN requires inspecting actual boundaries: nearby is not contact, and a visible air gap is a defect when contact/support is required. For temporal questions, inspect motion rather than inferring it from a single frame. Cite real timestamps and F01-F17 frame IDs. Reasons must describe visible pixels/motion, not restate the prompt. Return exactly one judgment for the supplied QID.
+
+USER
+Evaluate exactly one applicable defect question.
+
+Original requested prompt:
+The young woman with light brown hair pulled back stands in a brightly lit room with white walls, holding a small, light green dropper bottle labeled HOIVG-Bench. The product is a small-size bottle, compact enough to be comfortably held in one hand. She gestures expressively with her hands while demonstrating and speaking directly to the camera, showing how to use the bottle and engaging the viewer with her presentation.
+
+Object label: bottle
+Frozen pre-video action profile:
+{"actor_body_parts": ["hand"], "defining_event": null, "direction": null, "expected_object_count": 1, "functional_relation": "hand grasps the bottle to support it against gravity while gesturing", "gravity_support_required": true, "handedness": "unspecified", "main_action": "holding and demonstrating", "ordered_subactions": [], "release_or_placement_expected": false, "required_final_state": null, "required_hand_count": 1, "rigid_object_expected": true, "sustained_contact_required": true, "target_object": "bottle"}
+
+Frozen applicability reason: The target object is specified as a bottle, so interacting with the wrong object is relevant. / 指定了目标物体瓶子，需检查是否对错误物体执行交互。
+
+Question ID: C01
+Axis: C
+Defect question: Does the person perform the primary interaction on the wrong object?
+缺陷问题: 人物是否把主要交互动作施加在了错误物体上？
+FAIL condition: The primary interaction object is not the specified target, or the person operates only another object.
+FAIL 条件: 主要交互对象不是指定目标物体，或人物只操作了另一个物体。
+Critical: true
+
+Fixed frame/timestamp mapping:
+F01=0.000s
+F02=0.200s
+F03=0.400s
+F04=0.600s
+F05=0.800s
+F06=1.000s
+F07=1.200s
+F08=1.400s
+F09=1.600s
+F10=1.760s
+F11=1.960s
+F12=2.160s
+F13=2.360s
+F14=2.560s
+F15=2.760s
+F16=2.960s
+F17=3.160s
+
+CLEAN must cite inspected evidence. DEFECT/UNCERTAIN must cite the narrowest useful worst interval. Use VIDEO in evidence_frame_ids when evidence falls between the 17 fixed frames. Return only this QID.

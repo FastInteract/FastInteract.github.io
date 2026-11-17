@@ -1,0 +1,929 @@
+{
+  "version": "3.0.0",
+  "schema_name": "HOI-QA50-Strict-Proxy",
+  "question_count": 50,
+  "language": ["zh-CN", "en"],
+  "created_date": "2026-08-28",
+  "provenance": {
+    "source_document": "CoInteract: Physically-Consistent Human-Object Interaction Video Synthesis via Spatially-Structured Co-Generation",
+    "source_version": "arXiv:2604.19636v1",
+    "source_evaluation_reference": "Section 4.2, PDF page 10",
+    "paper_disclosure": "The paper states that Gemini-3-Pro evaluates interaction rationality with 50 binary questions, but the supplied paper does not publish the questions, evaluator prompt, or judge decoding settings.",
+    "original_questionnaire_availability": "unavailable_not_disclosed",
+    "proxy_status": "independently_designed_strict_proxy_not_the_paper_original",
+    "note_zh": "论文原始50题未公开且当前不可获得。本文件依据论文第3至5页和第11页描述的HOI失败模式独立设计，仅作为严格、可复现的代理问卷，不得宣称为论文原始问卷。",
+    "note_en": "The paper's original 50 questions are not disclosed and are unavailable. This file is an independently designed, strict, reproducible proxy based on the HOI failure modes described on pages 3-5 and 11; it must not be represented as the paper's original questionnaire."
+  },
+  "scope": {
+    "included": [
+      "action correctness and completion",
+      "hand-object contact and physical support",
+      "hand-object temporal coupling",
+      "hand, limb, and object structural integrity"
+    ],
+    "excluded": [
+      "aesthetic quality",
+      "person identity similarity",
+      "object identity or reference similarity unrelated to interaction mechanics",
+      "background consistency",
+      "lip synchronization",
+      "audio quality"
+    ]
+  },
+  "question_semantics": {
+    "polarity": "defect_detection",
+    "instruction_zh": "每个问题都在询问一种缺陷是否存在。只有在适用条件成立且视频中有足够可见证据证明该缺陷不存在时，才能回答CLEAN。不得因缺陷持续时间短而忽略明确的关键缺陷。",
+    "instruction_en": "Every question asks whether one defect is present. Answer CLEAN only when the applicability condition is true and sufficient visible evidence establishes that the defect is absent. Do not ignore a clearly visible critical defect merely because it is brief."
+  },
+  "answer_states": {
+    "DEFECT": {
+      "meaning_zh": "适用条件成立，并存在满足FAIL条件的可见证据。",
+      "meaning_en": "The applicability condition is true and visible evidence satisfies the FAIL condition.",
+      "credit": 0.0
+    },
+    "CLEAN": {
+      "meaning_zh": "适用条件成立，有足够可见证据确认FAIL条件未发生。",
+      "meaning_en": "The applicability condition is true and sufficient visible evidence confirms that the FAIL condition does not occur.",
+      "credit": 1.0
+    },
+    "UNCERTAIN": {
+      "meaning_zh": "适用条件成立，但因遮挡、分辨率、采样或证据冲突无法可靠判定；不得按通过计分。",
+      "meaning_en": "The applicability condition is true, but occlusion, resolution, sampling, or conflicting evidence prevents a reliable decision; this is not scored as a pass.",
+      "credit": 0.0
+    },
+    "NOT_APPLICABLE": {
+      "meaning_zh": "适用条件不成立；该题从分母中排除。",
+      "meaning_en": "The applicability condition is false; exclude this question from the denominator.",
+      "credit": null
+    }
+  },
+  "evidence_protocol": {
+    "required_for_states": ["DEFECT", "UNCERTAIN"],
+    "recommended_for_states": ["CLEAN"],
+    "required_fields": ["question_id", "state", "evidence_timestamps", "reason_zh", "reason_en"],
+    "timestamp_format": "seconds_or_frame_indices",
+    "critical_review_rule": "Every critical DEFECT must cite at least one visible time interval or frame. If temporal sampling omits the relevant phase, use UNCERTAIN rather than CLEAN.",
+    "global_view_rule": "Inspect the complete video in temporal order.",
+    "roi_view_rule": "For contact, penetration, occlusion, and finger questions, also inspect a hand-object region-of-interest view when available."
+  },
+  "axes": [
+    {
+      "id": "C",
+      "name_zh": "动作正确性与完成度",
+      "name_en": "Action correctness and completion",
+      "question_count": 10,
+      "overall_weight": 0.25
+    },
+    {
+      "id": "S",
+      "name_zh": "接触、支撑与空间关系",
+      "name_en": "Contact, support, and spatial relations",
+      "question_count": 16,
+      "overall_weight": 0.35
+    },
+    {
+      "id": "M",
+      "name_zh": "手物运动同步与时序",
+      "name_en": "Hand-object motion synchronization and timing",
+      "question_count": 12,
+      "overall_weight": 0.25
+    },
+    {
+      "id": "A",
+      "name_zh": "手部、肢体与物体结构",
+      "name_en": "Hand, limb, and object structure",
+      "question_count": 12,
+      "overall_weight": 0.15
+    }
+  ],
+  "questions": [
+    {
+      "id": "C01",
+      "axis": "C",
+      "question_zh": "人物是否把主要交互动作施加在了错误物体上？",
+      "question_en": "Does the person perform the primary interaction on the wrong object?",
+      "applicability": {
+        "code": "target_object_specified",
+        "condition_zh": "动作规范或条件输入指定了目标物体。",
+        "condition_en": "The action specification or conditioning input identifies a target object."
+      },
+      "critical": true,
+      "fail_condition_zh": "主要交互对象不是指定目标物体，或人物只操作了另一个物体。",
+      "fail_condition_en": "The primary interaction object is not the specified target, or the person operates only another object."
+    },
+    {
+      "id": "C02",
+      "axis": "C",
+      "question_zh": "动作规范要求的主要交互动作是否完全没有开始？",
+      "question_en": "Does the required primary interaction action fail to start at all?",
+      "applicability": {
+        "code": "always",
+        "condition_zh": "所有包含目标HOI动作的视频。",
+        "condition_en": "Every video with a target HOI action."
+      },
+      "critical": true,
+      "fail_condition_zh": "人物没有对目标物体做出可辨认的动作尝试。",
+      "fail_condition_en": "The person makes no recognizable attempt to perform the action on the target object."
+    },
+    {
+      "id": "C03",
+      "axis": "C",
+      "question_zh": "人物是否只靠近或摆姿势，而没有达到该动作的定义性交互事件？",
+      "question_en": "Does the person only approach or pose without reaching the action's defining interaction event?",
+      "applicability": {
+        "code": "defining_event_available",
+        "condition_zh": "动作可以由一个定义性事件判定，例如抓住、戴上、打开、抬起或放下。",
+        "condition_en": "The action has a defining event such as grasping, wearing, opening, lifting, or placing."
+      },
+      "critical": true,
+      "fail_condition_zh": "视频中始终没有出现动作规范所要求的定义性交互事件。",
+      "fail_condition_en": "The defining interaction event required by the action specification never occurs."
+    },
+    {
+      "id": "C04",
+      "axis": "C",
+      "question_zh": "动作规范要求的最终物体状态是否没有实现？",
+      "question_en": "Does the object fail to reach the final state required by the action specification?",
+      "applicability": {
+        "code": "final_state_specified",
+        "condition_zh": "动作规范给出了可观察的最终状态。",
+        "condition_en": "The action specification defines an observable final state."
+      },
+      "critical": true,
+      "fail_condition_zh": "视频结束前，目标物体没有达到规定的最终位置、姿态或功能状态。",
+      "fail_condition_en": "Before the video ends, the target object does not reach the required final position, pose, or functional state."
+    },
+    {
+      "id": "C05",
+      "axis": "C",
+      "question_zh": "执行主要动作的身体部位是否与动作规范不符？",
+      "question_en": "Is the body part performing the primary action inconsistent with the action specification?",
+      "applicability": {
+        "code": "body_part_specified",
+        "condition_zh": "动作规范明确或必然要求特定身体部位。",
+        "condition_en": "The action explicitly or inherently requires a particular body part."
+      },
+      "critical": false,
+      "fail_condition_zh": "主要动作由错误的身体部位完成。",
+      "fail_condition_en": "The primary action is performed by the wrong body part."
+    },
+    {
+      "id": "C06",
+      "axis": "C",
+      "question_zh": "执行动作的左手或右手是否与动作规范不符？",
+      "question_en": "Is the left or right hand used for the action inconsistent with the action specification?",
+      "applicability": {
+        "code": "handedness_specified",
+        "condition_zh": "动作规范明确指定左手或右手。",
+        "condition_en": "The action specification explicitly states left or right hand."
+      },
+      "critical": false,
+      "fail_condition_zh": "实际执行动作的手侧与指定手侧相反。",
+      "fail_condition_en": "The action is performed with the opposite hand from the specified side."
+    },
+    {
+      "id": "C07",
+      "axis": "C",
+      "question_zh": "参与主要动作的手数是否与动作规范不符？",
+      "question_en": "Is the number of hands participating in the primary action inconsistent with the action specification?",
+      "applicability": {
+        "code": "hand_count_specified",
+        "condition_zh": "动作规范明确或必然要求单手或双手。",
+        "condition_en": "The action explicitly or inherently requires one hand or two hands."
+      },
+      "critical": false,
+      "fail_condition_zh": "动作要求单手但实际由双手执行，或要求双手但只有单手参与。",
+      "fail_condition_en": "The action requires one hand but uses two, or requires two hands but only one participates."
+    },
+    {
+      "id": "C08",
+      "axis": "C",
+      "question_zh": "多个必需子动作是否以错误顺序发生？",
+      "question_en": "Do the required sub-actions occur in the wrong order?",
+      "applicability": {
+        "code": "ordered_multi_step_action",
+        "condition_zh": "动作规范包含两个或以上有先后约束的子动作。",
+        "condition_en": "The action contains two or more sub-actions with a required order."
+      },
+      "critical": true,
+      "fail_condition_zh": "至少一个必需子动作发生在其前置步骤之前，导致动作逻辑不成立。",
+      "fail_condition_en": "At least one required sub-action occurs before its prerequisite, invalidating the action logic."
+    },
+    {
+      "id": "C09",
+      "axis": "C",
+      "question_zh": "物体运动方向是否与动作规范指定方向相反？",
+      "question_en": "Is the object's motion direction opposite to the direction specified by the action?",
+      "applicability": {
+        "code": "direction_specified",
+        "condition_zh": "动作规范指定了上、下、左、右、顺时针或逆时针等方向。",
+        "condition_en": "The action specifies a direction such as up, down, left, right, clockwise, or counterclockwise."
+      },
+      "critical": false,
+      "fail_condition_zh": "主要物体运动方向与指定方向明确相反。",
+      "fail_condition_en": "The primary object motion is clearly opposite to the specified direction."
+    },
+    {
+      "id": "C10",
+      "axis": "C",
+      "question_zh": "需要维持的动作状态是否在规定阶段结束前提前丢失？",
+      "question_en": "Is a required sustained action state lost before the specified phase ends?",
+      "applicability": {
+        "code": "sustained_state_required",
+        "condition_zh": "动作要求在一段时间内持续持有、佩戴、支撑或保持物体状态。",
+        "condition_en": "The action requires holding, wearing, supporting, or maintaining an object state for a period."
+      },
+      "critical": true,
+      "fail_condition_zh": "规定阶段尚未结束，必需状态已经明确中断且没有合理恢复。",
+      "fail_condition_en": "The required state clearly ends before the specified phase is over and is not plausibly restored."
+    },
+    {
+      "id": "S01",
+      "axis": "S",
+      "question_zh": "在必须接触的关键阶段，指定身体部位是否始终没有接触目标物体？",
+      "question_en": "During a phase that requires contact, does the specified body part never contact the target object?",
+      "applicability": {
+        "code": "contact_required",
+        "condition_zh": "动作包含必须发生身体部位与物体接触的阶段。",
+        "condition_en": "The action contains a phase that requires body-object contact."
+      },
+      "critical": true,
+      "fail_condition_zh": "关键阶段内，指定身体部位与目标物体之间一直存在可见分离。",
+      "fail_condition_en": "Throughout the key phase, the specified body part remains visibly separated from the target object."
+    },
+    {
+      "id": "S02",
+      "axis": "S",
+      "question_zh": "在必须保持接触时，手与物体表面之间是否出现明确空气间隙？",
+      "question_en": "While contact must be maintained, is there a clear air gap between the hand and the object surface?",
+      "applicability": {
+        "code": "sustained_hand_contact",
+        "condition_zh": "动作要求手在关键阶段持续接触物体，且接触区域可见。",
+        "condition_en": "The hand must remain in contact during a key phase and the contact region is visible."
+      },
+      "critical": true,
+      "fail_condition_zh": "至少一帧清楚显示本应接触的手与物体表面之间存在非零可见间隙。",
+      "fail_condition_en": "At least one clear frame shows a visible nonzero gap where the hand should contact the object surface."
+    },
+    {
+      "id": "S03",
+      "axis": "S",
+      "question_zh": "需要手或身体支撑时，物体是否在没有任何可见支撑的情况下悬空？",
+      "question_en": "When hand or body support is required, does the object float without any visible support?",
+      "applicability": {
+        "code": "gravity_support_required",
+        "condition_zh": "物体不应自行悬浮，当前阶段需要手、身体或可见表面抵抗重力。",
+        "condition_en": "The object should not self-float and the phase requires a hand, body part, or visible surface to oppose gravity."
+      },
+      "critical": true,
+      "fail_condition_zh": "物体与所有可能支撑体清楚分离，却仍保持悬空或稳定停留。",
+      "fail_condition_en": "The object is clearly separated from every possible support yet remains suspended or stably stationary."
+    },
+    {
+      "id": "S04",
+      "axis": "S",
+      "question_zh": "物体是否在与操控手明确分离时仍像被该手操控一样平移或旋转？",
+      "question_en": "Does the object translate or rotate as if controlled by the hand while clearly detached from it?",
+      "applicability": {
+        "code": "hand_controlled_motion_expected",
+        "condition_zh": "物体运动应由手的抓握、推动、拉动或托举产生。",
+        "condition_en": "The object's motion should be caused by the hand grasping, pushing, pulling, or supporting it."
+      },
+      "critical": true,
+      "fail_condition_zh": "手物之间存在清楚间隙，但物体仍连续复制手的操控轨迹。",
+      "fail_condition_en": "A clear hand-object gap exists while the object continues to copy the hand's control trajectory."
+    },
+    {
+      "id": "S05",
+      "axis": "S",
+      "question_zh": "所需接触是否在动作完成前非预期地断开？",
+      "question_en": "Does required contact break unexpectedly before the action is complete?",
+      "applicability": {
+        "code": "contact_until_completion_required",
+        "condition_zh": "动作从接触建立到完成之间要求持续接触。",
+        "condition_en": "The action requires continuous contact from contact establishment until completion."
+      },
+      "critical": true,
+      "fail_condition_zh": "完成事件发生前，接触明确断开，且动作规范没有要求释放。",
+      "fail_condition_en": "Contact clearly breaks before the completion event even though the action does not require release."
+    },
+    {
+      "id": "S06",
+      "axis": "S",
+      "question_zh": "手或手指是否明显穿入目标物体实体内部？",
+      "question_en": "Does the hand or a finger visibly penetrate into the solid interior of the target object?",
+      "applicability": {
+        "code": "hand_object_boundary_visible",
+        "condition_zh": "手与物体的交界区域在至少一个关键时刻可见。",
+        "condition_en": "The hand-object boundary is visible at one or more key moments."
+      },
+      "critical": true,
+      "fail_condition_zh": "手或手指越过物体外表面并占据刚性实体内部，且该进入不是动作要求。",
+      "fail_condition_en": "The hand or finger crosses the outer surface into a rigid solid interior without the action requiring insertion."
+    },
+    {
+      "id": "S07",
+      "axis": "S",
+      "question_zh": "目标物体是否明显穿入非交互身体区域？",
+      "question_en": "Does the target object visibly penetrate an unintended body region?",
+      "applicability": {
+        "code": "object_near_body",
+        "condition_zh": "目标物体接近躯干、手臂、腿或其他非预期接触身体区域。",
+        "condition_en": "The target object approaches the torso, arm, leg, or another body region not intended for contact."
+      },
+      "critical": true,
+      "fail_condition_zh": "物体表面越过身体外轮廓并进入人体体积，且动作不要求这种进入。",
+      "fail_condition_en": "The object surface crosses the body boundary into body volume without the action requiring it."
+    },
+    {
+      "id": "S08",
+      "axis": "S",
+      "question_zh": "手与物体在接触处是否融合成无法分离的单一结构？",
+      "question_en": "Do the hand and object fuse into an inseparable single structure at the contact region?",
+      "applicability": {
+        "code": "contact_boundary_visible",
+        "condition_zh": "手物接触边界在至少一个关键时刻可见。",
+        "condition_en": "The hand-object contact boundary is visible at one or more key moments."
+      },
+      "critical": true,
+      "fail_condition_zh": "接触处失去可解释的两表面边界，手部纹理或几何与物体连续熔合。",
+      "fail_condition_en": "The two-surface boundary becomes uninterpretable because hand texture or geometry continuously melts into the object."
+    },
+    {
+      "id": "S09",
+      "axis": "S",
+      "question_zh": "实际接触位置是否落在不适合完成指定动作的物体区域？",
+      "question_en": "Is the actual contact located on an object region unsuitable for completing the specified action?",
+      "applicability": {
+        "code": "functional_contact_region_exists",
+        "condition_zh": "该动作要求接触特定功能部件或可供操作区域。",
+        "condition_en": "The action requires contact with a particular functional part or manipulable region."
+      },
+      "critical": false,
+      "fail_condition_zh": "接触发生在无法产生所需功能效果的区域。",
+      "fail_condition_en": "Contact occurs on a region that cannot produce the required functional effect."
+    },
+    {
+      "id": "S10",
+      "axis": "S",
+      "question_zh": "当前抓握或托举接触是否不足以抵抗物体重力？",
+      "question_en": "Is the current grasp or support contact insufficient to oppose the object's gravity?",
+      "applicability": {
+        "code": "object_supported_against_gravity",
+        "condition_zh": "人物正在抓握、托举或悬持受重力影响的物体。",
+        "condition_en": "The person is grasping, supporting, or suspending an object affected by gravity."
+      },
+      "critical": true,
+      "fail_condition_zh": "可见接触点位于无法承重的位置，且没有其他支撑可以解释物体稳定。",
+      "fail_condition_en": "The visible contact lies where it cannot bear the load and no other support explains the object's stability."
+    },
+    {
+      "id": "S11",
+      "axis": "S",
+      "question_zh": "手指接触分布是否无法形成动作所需的抓握类型？",
+      "question_en": "Is the finger-contact distribution incapable of forming the grasp type required by the action?",
+      "applicability": {
+        "code": "finger_grasp_required",
+        "condition_zh": "动作要求由可见手指形成抓、捏、夹或包握。",
+        "condition_en": "The action requires visible fingers to grasp, pinch, clamp, or wrap around the object."
+      },
+      "critical": false,
+      "fail_condition_zh": "可见手指均未处于可施加所需夹持力的位置。",
+      "fail_condition_en": "The visible fingers are not positioned to apply the required holding force."
+    },
+    {
+      "id": "S12",
+      "axis": "S",
+      "question_zh": "完成放置后，物体是否没有与预期承载表面接触？",
+      "question_en": "After placement is complete, does the object fail to contact the intended supporting surface?",
+      "applicability": {
+        "code": "placement_on_surface",
+        "condition_zh": "动作要求把物体放到桌面、地面、容器或其他支撑面上。",
+        "condition_en": "The action requires placing the object on a table, floor, container, or another support surface."
+      },
+      "critical": true,
+      "fail_condition_zh": "放置完成状态下，物体与预期支撑面之间仍有清楚间隙。",
+      "fail_condition_en": "In the completed placement state, a clear gap remains between the object and intended support surface."
+    },
+    {
+      "id": "S13",
+      "axis": "S",
+      "question_zh": "手物交界处的前后遮挡顺序是否与两者空间位置矛盾？",
+      "question_en": "Is the front-back occlusion order at the hand-object boundary inconsistent with their spatial positions?",
+      "applicability": {
+        "code": "partial_hand_object_occlusion",
+        "condition_zh": "手和物体在关键阶段发生部分相互遮挡。",
+        "condition_en": "The hand and object partially occlude one another during a key phase."
+      },
+      "critical": false,
+      "fail_condition_zh": "同一局部关系中，前景表面无运动依据地被背景表面覆盖。",
+      "fail_condition_en": "Within the same local relation, the foreground surface is covered by the background surface without motion that could explain the change."
+    },
+    {
+      "id": "S14",
+      "axis": "S",
+      "question_zh": "在连续接触期间，接触点是否无几何原因地跳到物体另一位置？",
+      "question_en": "During continuous contact, does the contact point jump to another object location without a geometric cause?",
+      "applicability": {
+        "code": "continuous_contact_visible",
+        "condition_zh": "连续帧中接触保持且接触区域可见。",
+        "condition_en": "Contact is maintained and visible across consecutive frames."
+      },
+      "critical": false,
+      "fail_condition_zh": "手和物体没有足以解释变化的相对运动，但接触点发生离散跳变。",
+      "fail_condition_en": "The contact point changes discontinuously without sufficient relative hand-object motion to explain it."
+    },
+    {
+      "id": "S15",
+      "axis": "S",
+      "question_zh": "目标物体是否与非预期身体部位发生明显实体碰撞？",
+      "question_en": "Does the target object undergo an obvious solid collision with an unintended body part?",
+      "applicability": {
+        "code": "object_approaches_unintended_body_part",
+        "condition_zh": "目标物体运动轨迹接近非预期交互身体部位。",
+        "condition_en": "The target object's trajectory approaches a body part not intended for interaction."
+      },
+      "critical": true,
+      "fail_condition_zh": "物体撞到非预期身体部位，却没有合理避让、停止或碰撞响应。",
+      "fail_condition_en": "The object hits an unintended body part without plausible avoidance, stopping, or collision response."
+    },
+    {
+      "id": "S16",
+      "axis": "S",
+      "question_zh": "释放后，物体是否在没有新支撑的情况下悬停？",
+      "question_en": "After release, does the object remain suspended without a new support?",
+      "applicability": {
+        "code": "release_without_new_support",
+        "condition_zh": "人物释放物体，且物体没有被另一只手、身体部位或表面接住。",
+        "condition_en": "The person releases the object and it is not caught by another hand, body part, or surface."
+      },
+      "critical": true,
+      "fail_condition_zh": "接触已清楚结束，物体却在受重力方向上保持固定或悬空。",
+      "fail_condition_en": "Contact has clearly ended, yet the object remains fixed or suspended against gravity."
+    },
+    {
+      "id": "M01",
+      "axis": "M",
+      "question_zh": "物体是否在操控接触建立之前就开始了受控运动？",
+      "question_en": "Does the object begin controlled motion before control contact is established?",
+      "applicability": {
+        "code": "contact_then_manipulation",
+        "condition_zh": "动作应先建立手物接触，再由手推动、拉动、抓取或抬动物体。",
+        "condition_en": "The hand should establish contact before pushing, pulling, grasping, or lifting the object."
+      },
+      "critical": true,
+      "fail_condition_zh": "手尚未接触物体，物体已按随后手部轨迹开始移动。",
+      "fail_condition_en": "The object starts moving along the hand's subsequent trajectory before the hand contacts it."
+    },
+    {
+      "id": "M02",
+      "axis": "M",
+      "question_zh": "接触断开后，物体是否继续复制手的受控运动？",
+      "question_en": "After contact breaks, does the object continue copying the hand's controlled motion?",
+      "applicability": {
+        "code": "visible_contact_break_during_motion",
+        "condition_zh": "运动期间可观察到手物接触明确断开。",
+        "condition_en": "A clear hand-object contact break is observable during motion."
+      },
+      "critical": true,
+      "fail_condition_zh": "手物分离后，物体仍与手保持近似刚性同步轨迹。",
+      "fail_condition_en": "After separation, the object continues on an approximately rigidly synchronized trajectory with the hand."
+    },
+    {
+      "id": "M03",
+      "axis": "M",
+      "question_zh": "稳定持握期间，物体平移是否明显滞后于持物手？",
+      "question_en": "During a stable hold, does the object's translation visibly lag behind the holding hand?",
+      "applicability": {
+        "code": "stable_hold_with_translation",
+        "condition_zh": "手稳定持握物体并发生可见平移。",
+        "condition_en": "The hand stably holds the object while visible translation occurs."
+      },
+      "critical": true,
+      "fail_condition_zh": "持物手已经平移，物体随后才追上，形成可见时间延迟。",
+      "fail_condition_en": "The holding hand translates first and the object catches up later, creating a visible temporal delay."
+    },
+    {
+      "id": "M04",
+      "axis": "M",
+      "question_zh": "稳定持握期间，物体是否移动而持物手没有产生对应运动？",
+      "question_en": "During a stable hold, does the object move without corresponding motion of the holding hand?",
+      "applicability": {
+        "code": "stable_hold_visible",
+        "condition_zh": "手物处于稳定持握关系且两者运动可观察。",
+        "condition_en": "The hand and object are in a stable hold and both motions are observable."
+      },
+      "critical": true,
+      "fail_condition_zh": "物体发生明显刚体位移，但持物手基本静止。",
+      "fail_condition_en": "The object undergoes clear rigid motion while the holding hand remains essentially stationary."
+    },
+    {
+      "id": "M05",
+      "axis": "M",
+      "question_zh": "稳定抓握期间，物体是否相对手掌发生非预期滑移？",
+      "question_en": "During a stable grasp, does the object slip unexpectedly relative to the palm?",
+      "applicability": {
+        "code": "stable_grasp_without_slip_action",
+        "condition_zh": "动作要求稳定抓握，且不包含刻意滑动或重新调整抓点。",
+        "condition_en": "The action requires a stable grasp and does not call for deliberate sliding or regrasping."
+      },
+      "critical": false,
+      "fail_condition_zh": "物体相对掌心或固定手指持续位移，且没有重新抓握动作。",
+      "fail_condition_en": "The object moves relative to the palm or fixed fingers without a regrasping action."
+    },
+    {
+      "id": "M06",
+      "axis": "M",
+      "question_zh": "物体是否出现未传递到接触手的独立抖动？",
+      "question_en": "Does the object jitter independently without the motion propagating to the contacting hand?",
+      "applicability": {
+        "code": "contact_during_visible_motion",
+        "condition_zh": "手物保持接触且时间分辨率足以观察短时运动。",
+        "condition_en": "The hand and object remain in contact and temporal resolution is sufficient to observe short motions."
+      },
+      "critical": false,
+      "fail_condition_zh": "物体发生一个或多个高频位置跳动，而接触手没有对应运动。",
+      "fail_condition_en": "The object shows one or more high-frequency position jumps without corresponding motion in the contacting hand."
+    },
+    {
+      "id": "M07",
+      "axis": "M",
+      "question_zh": "目标物体的位置是否在相邻时刻发生无法由速度解释的瞬移？",
+      "question_en": "Does the target object's position teleport between adjacent moments in a way its velocity cannot explain?",
+      "applicability": {
+        "code": "object_track_observable",
+        "condition_zh": "目标物体在瞬移前后均可识别，或其轨迹可跨短遮挡可靠对应。",
+        "condition_en": "The target object is identifiable before and after the jump, or its track can be reliably matched across a brief occlusion."
+      },
+      "critical": true,
+      "fail_condition_zh": "物体没有经过中间路径便出现在明显不同位置。",
+      "fail_condition_en": "The object appears at a clearly different position without traversing an intermediate path."
+    },
+    {
+      "id": "M08",
+      "axis": "M",
+      "question_zh": "目标物体朝向是否在相邻时刻发生无因的离散翻转？",
+      "question_en": "Does the target object's orientation flip discontinuously between adjacent moments without a cause?",
+      "applicability": {
+        "code": "object_orientation_observable",
+        "condition_zh": "物体外观或几何能够支持连续朝向判断。",
+        "condition_en": "The object's appearance or geometry supports tracking its orientation continuously."
+      },
+      "critical": false,
+      "fail_condition_zh": "物体朝向大幅改变，但手部或物体运动不足以产生该旋转。",
+      "fail_condition_en": "The orientation changes substantially without enough hand or object motion to cause the rotation."
+    },
+    {
+      "id": "M09",
+      "axis": "M",
+      "question_zh": "新的手物接触是否在手未接近物体时突然出现？",
+      "question_en": "Does new hand-object contact appear suddenly without the hand approaching the object?",
+      "applicability": {
+        "code": "contact_establishment_visible",
+        "condition_zh": "视频包含从分离到接触的转变，且转变阶段可见。",
+        "condition_en": "The video contains a visible transition from separation to contact."
+      },
+      "critical": false,
+      "fail_condition_zh": "相邻时刻从明显分离直接变为接触，但没有足够接近运动。",
+      "fail_condition_en": "Adjacent moments change from clear separation directly to contact without sufficient approach motion."
+    },
+    {
+      "id": "M10",
+      "axis": "M",
+      "question_zh": "释放后，物体的重力响应是否出现不合理延迟？",
+      "question_en": "After release, is the object's gravity response implausibly delayed?",
+      "applicability": {
+        "code": "unsupported_release_with_observable_aftermath",
+        "condition_zh": "物体被释放后没有新支撑，且视频保留了足够的释放后时段。",
+        "condition_en": "The object has no new support after release and enough post-release video is available."
+      },
+      "critical": true,
+      "fail_condition_zh": "接触已结束，但物体在多个可辨时间步后才开始下落或响应。",
+      "fail_condition_en": "Contact has ended, but the object does not begin falling or responding until multiple discernible time steps later."
+    },
+    {
+      "id": "M11",
+      "axis": "M",
+      "question_zh": "交互状态是否无因地突然重置到较早状态？",
+      "question_en": "Does the interaction state suddenly reset to an earlier state without a cause?",
+      "applicability": {
+        "code": "multi_phase_action",
+        "condition_zh": "动作在时间上经历两个或以上可区分状态。",
+        "condition_en": "The action progresses through two or more temporally distinguishable states."
+      },
+      "critical": false,
+      "fail_condition_zh": "人物、手或物体突然恢复到已经完成过的较早状态，且没有逆向动作。",
+      "fail_condition_en": "The person, hand, or object abruptly returns to a previously completed state without a reversing action."
+    },
+    {
+      "id": "M12",
+      "axis": "M",
+      "question_zh": "短暂遮挡后，手物相对关系是否跳变为与遮挡前运动不相容的状态？",
+      "question_en": "After a brief occlusion, does the hand-object relation jump to a state incompatible with the pre-occlusion motion?",
+      "applicability": {
+        "code": "brief_occlusion_with_track_recovery",
+        "condition_zh": "手物关系经历短暂遮挡，且遮挡前后均可可靠识别。",
+        "condition_en": "The hand-object relation undergoes a brief occlusion and can be reliably identified before and after it."
+      },
+      "critical": true,
+      "fail_condition_zh": "遮挡后接触侧、相对位置或持握状态突变，且遮挡前轨迹无法解释该变化。",
+      "fail_condition_en": "After occlusion, contact side, relative position, or grasp state changes in a way the pre-occlusion trajectory cannot explain."
+    },
+    {
+      "id": "A01",
+      "axis": "A",
+      "question_zh": "可见交互手是否出现明确错误的手指数目？",
+      "question_en": "Does a visible interacting hand have a clearly incorrect number of fingers?",
+      "applicability": {
+        "code": "interacting_fingers_countable",
+        "condition_zh": "交互手的手指在至少一个关键时刻足够清晰，可合理判断数量。",
+        "condition_en": "The interacting fingers are clear enough at one or more key moments to assess their count."
+      },
+      "critical": false,
+      "fail_condition_zh": "同一只手可辨认地具有少于或多于五根手指，且不是遮挡造成。",
+      "fail_condition_en": "One hand visibly has fewer or more than five fingers, and occlusion does not explain the count."
+    },
+    {
+      "id": "A02",
+      "axis": "A",
+      "question_zh": "两根或以上手指是否非生理性地融合为一根结构？",
+      "question_en": "Do two or more fingers merge non-anatomically into one structure?",
+      "applicability": {
+        "code": "interacting_fingers_visible",
+        "condition_zh": "交互手的指部轮廓在至少一个关键时刻可见。",
+        "condition_en": "Finger contours of the interacting hand are visible at one or more key moments."
+      },
+      "critical": false,
+      "fail_condition_zh": "本应分离的手指之间没有可解释边界，并连续形成单一指状结构。",
+      "fail_condition_en": "Fingers that should be separate lack an explainable boundary and form one continuous finger-like structure."
+    },
+    {
+      "id": "A03",
+      "axis": "A",
+      "question_zh": "交互手指关节是否向人体不可行方向弯折？",
+      "question_en": "Does an interacting finger joint bend in a biomechanically impossible direction?",
+      "applicability": {
+        "code": "finger_joint_pose_visible",
+        "condition_zh": "至少一个交互手指关节姿态足够可见。",
+        "condition_en": "At least one interacting finger joint pose is sufficiently visible."
+      },
+      "critical": true,
+      "fail_condition_zh": "指关节出现清楚的反向折叠、超范围扭转或不可能关节连接。",
+      "fail_condition_en": "A finger joint shows clear backward folding, out-of-range twisting, or an impossible joint connection."
+    },
+    {
+      "id": "A04",
+      "axis": "A",
+      "question_zh": "交互手腕是否与对应前臂断开？",
+      "question_en": "Does an interacting wrist disconnect from its corresponding forearm?",
+      "applicability": {
+        "code": "wrist_forearm_region_visible",
+        "condition_zh": "交互侧手腕与前臂连接区域在至少一个关键时刻可见。",
+        "condition_en": "The wrist-forearm connection on the interacting side is visible at one or more key moments."
+      },
+      "critical": true,
+      "fail_condition_zh": "手腕与前臂之间出现明确断裂、悬空连接或错误拓扑。",
+      "fail_condition_en": "A clear break, floating connection, or incorrect topology appears between wrist and forearm."
+    },
+    {
+      "id": "A05",
+      "axis": "A",
+      "question_zh": "交互过程中是否凭空出现额外的手？",
+      "question_en": "Does an extra hand appear from nowhere during the interaction?",
+      "applicability": {
+        "code": "upper_body_hands_observable",
+        "condition_zh": "画面覆盖足够的人体区域，可区分人物已有双手。",
+        "condition_en": "Enough of the upper body is visible to distinguish the person's existing two hands."
+      },
+      "critical": true,
+      "fail_condition_zh": "同一人物同时或连续出现无法对应到正常双臂的第三只手。",
+      "fail_condition_en": "A third hand appears simultaneously or sequentially without correspondence to either normal arm."
+    },
+    {
+      "id": "A06",
+      "axis": "A",
+      "question_zh": "本应可见的交互手是否在没有遮挡时消失？",
+      "question_en": "Does an interacting hand disappear when it should be visible and is not occluded?",
+      "applicability": {
+        "code": "interacting_hand_expected_visible",
+        "condition_zh": "依据前后轨迹，交互手应位于画内且没有物体或身体遮挡。",
+        "condition_en": "Based on its trajectory, the interacting hand should be in frame and is not occluded by an object or the body."
+      },
+      "critical": true,
+      "fail_condition_zh": "交互手在无遮挡帧中完全缺失，随后又无因出现。",
+      "fail_condition_en": "The interacting hand is entirely absent in an unoccluded frame and later reappears without cause."
+    },
+    {
+      "id": "A07",
+      "axis": "A",
+      "question_zh": "交互手臂长度是否发生无法由透视解释的突变？",
+      "question_en": "Does the interacting arm length change abruptly in a way perspective cannot explain?",
+      "applicability": {
+        "code": "interacting_arm_track_visible",
+        "condition_zh": "交互侧肩、肘、腕中的足够节点可跨时间观察。",
+        "condition_en": "Enough shoulder, elbow, and wrist landmarks on the interacting side are visible over time."
+      },
+      "critical": true,
+      "fail_condition_zh": "为接触物体，手臂明显伸长或缩短，且相机透视与关节运动不足以解释。",
+      "fail_condition_en": "The arm visibly lengthens or shortens to reach the object without perspective or joint motion explaining it."
+    },
+    {
+      "id": "A08",
+      "axis": "A",
+      "question_zh": "交互手的整体形状是否坍缩成不可辨认结构？",
+      "question_en": "Does the interacting hand collapse into an unrecognizable structure?",
+      "applicability": {
+        "code": "interacting_hand_visible",
+        "condition_zh": "交互手在至少一个关键时刻可见。",
+        "condition_en": "The interacting hand is visible at one or more key moments."
+      },
+      "critical": true,
+      "fail_condition_zh": "手掌与手指拓扑大面积丢失、熔化或变成无法解释的块状结构。",
+      "fail_condition_en": "Palm and finger topology is largely lost, melted, or replaced by an uninterpretable blob."
+    },
+    {
+      "id": "A09",
+      "axis": "A",
+      "question_zh": "目标物体是否在没有完全遮挡或离开画面的情况下消失？",
+      "question_en": "Does the target object disappear without being fully occluded or leaving the frame?",
+      "applicability": {
+        "code": "target_object_expected_visible",
+        "condition_zh": "依据轨迹，目标物体应仍在画内且没有被完全遮挡。",
+        "condition_en": "Based on its trajectory, the target object should remain in frame and is not fully occluded."
+      },
+      "critical": true,
+      "fail_condition_zh": "目标物体在应可见时完全缺失，并可能随后无因重现。",
+      "fail_condition_en": "The target object is entirely absent when it should be visible and may later reappear without cause."
+    },
+    {
+      "id": "A10",
+      "axis": "A",
+      "question_zh": "交互过程中是否无因出现第二个目标物体副本？",
+      "question_en": "Does a second copy of the target object appear without cause during the interaction?",
+      "applicability": {
+        "code": "single_target_object_expected",
+        "condition_zh": "输入和动作规范只包含一个目标物体。",
+        "condition_en": "The input and action specification contain only one target object."
+      },
+      "critical": true,
+      "fail_condition_zh": "画面同时或连续出现两个无法由遮挡、镜像或场景中已有物体解释的目标副本。",
+      "fail_condition_en": "Two target copies appear simultaneously or sequentially without occlusion, reflection, or a pre-existing scene object explaining them."
+    },
+    {
+      "id": "A11",
+      "axis": "A",
+      "question_zh": "刚性目标物体的几何形状是否发生非动作要求的形变？",
+      "question_en": "Does a rigid target object's geometry deform without the action requiring deformation?",
+      "applicability": {
+        "code": "rigid_object_or_shape_should_remain_stable",
+        "condition_zh": "目标物体是刚性物体，或当前动作不应改变其整体形状。",
+        "condition_en": "The target is rigid, or the current action should not change its global shape."
+      },
+      "critical": false,
+      "fail_condition_zh": "物体轮廓或部件比例出现无法由视角变化解释的弯曲、融化或拉伸。",
+      "fail_condition_en": "The object's contour or part proportions bend, melt, or stretch in a way viewpoint change cannot explain."
+    },
+    {
+      "id": "A12",
+      "axis": "A",
+      "question_zh": "目标物体尺度是否在相邻时刻发生无法由景深变化解释的突变？",
+      "question_en": "Does the target object's scale jump between adjacent moments in a way depth change cannot explain?",
+      "applicability": {
+        "code": "object_scale_trackable",
+        "condition_zh": "目标物体可跨时间识别，且相机或物体深度变化可判断。",
+        "condition_en": "The target object is trackable over time and camera or object depth change can be assessed."
+      },
+      "critical": false,
+      "fail_condition_zh": "物体图像尺度突然放大或缩小，但没有相应的深度或相机运动。",
+      "fail_condition_en": "The object's image scale suddenly grows or shrinks without corresponding depth or camera motion."
+    }
+  ],
+  "scoring": {
+    "question_weight": 1.0,
+    "not_applicable_rule": "Exclude NOT_APPLICABLE from the denominator.",
+    "uncertain_rule": "UNCERTAIN receives zero credit and must be reported separately; it can never contribute to a perfect score.",
+    "axis_raw_formula": "For each axis: 100 * CLEAN_count / (CLEAN_count + DEFECT_count + UNCERTAIN_count). Return null only if every question on that axis is NOT_APPLICABLE.",
+    "axis_final_formula": "For each axis: axis_final = min(axis_raw, every triggered cap for that axis). If no axis cap is triggered, axis_final = axis_raw.",
+    "overall_axis_weights": {
+      "C": 0.25,
+      "S": 0.35,
+      "M": 0.25,
+      "A": 0.15
+    },
+    "overall_raw_formula": "Weighted harmonic mean of all non-null axis_final scores using the listed weights; renormalize weights over non-null axes. If any non-null axis_final score is zero, overall_raw is zero.",
+    "overall_final_formula": "overall_final = min(overall_raw, every triggered critical_failure_cap).",
+    "full_score_requirements": [
+      "overall_final equals 100",
+      "no question is DEFECT",
+      "no applicable question is UNCERTAIN",
+      "every applicable critical question is CLEAN",
+      "no critical failure cap is triggered"
+    ]
+  },
+  "critical_failure_caps": [
+    {
+      "id": "wrong_or_missing_primary_action",
+      "trigger": {
+        "state": "DEFECT",
+        "any_question_ids": ["C01", "C02", "C03"]
+      },
+      "axis_caps": {"C": 0},
+      "overall_cap": 35,
+      "reason_zh": "目标物体错误、主要动作缺失或定义性交互事件未发生。",
+      "reason_en": "The target object is wrong, the primary action is absent, or the defining interaction event never occurs."
+    },
+    {
+      "id": "required_final_state_missing",
+      "trigger": {
+        "state": "DEFECT",
+        "any_question_ids": ["C04", "C10"]
+      },
+      "axis_caps": {"C": 25},
+      "overall_cap": 50,
+      "reason_zh": "要求的最终状态未实现或需要维持的状态提前丢失。",
+      "reason_en": "The required final state is not reached or a required sustained state is lost early."
+    },
+    {
+      "id": "isolated_visible_contact_gap",
+      "trigger": {
+        "state": "DEFECT",
+        "any_question_ids": ["S02"]
+      },
+      "axis_caps": {"S": 50},
+      "overall_cap": 60,
+      "reason_zh": "必须保持接触时出现至少一个清楚的手物空气间隙。",
+      "reason_en": "At least one clear hand-object air gap appears while contact must be maintained."
+    },
+    {
+      "id": "detached_or_floating_object",
+      "trigger": {
+        "state": "DEFECT",
+        "any_question_ids": ["S01", "S03", "S04", "S05", "S10", "S12", "S16"]
+      },
+      "axis_caps": {"S": 25},
+      "overall_cap": 40,
+      "reason_zh": "必需接触/支撑缺失、物体无支撑漂浮、在脱手后继续被操控，或放置/释放后的支撑关系不成立。",
+      "reason_en": "Required contact or support is missing, the object floats unsupported, remains controlled after detachment, or lacks valid support after placement or release."
+    },
+    {
+      "id": "penetration_or_fusion",
+      "trigger": {
+        "state": "DEFECT",
+        "any_question_ids": ["S06", "S07", "S08"]
+      },
+      "axis_caps": {"S": 20},
+      "overall_cap": 45,
+      "reason_zh": "存在明确手物穿透、物体穿入身体或手物融合。",
+      "reason_en": "There is clear hand-object penetration, object-body penetration, or hand-object fusion."
+    },
+    {
+      "id": "gross_motion_desynchronization",
+      "trigger": {
+        "state": "DEFECT",
+        "any_question_ids": ["M01", "M02", "M03", "M04", "M07", "M10", "M12"]
+      },
+      "axis_caps": {"M": 20},
+      "overall_cap": 45,
+      "reason_zh": "手物运动存在明确因果倒置、独立运动、严重滞后、瞬移或遮挡后关系跳变。",
+      "reason_en": "Hand-object motion shows reversed causality, independent motion, severe lag, teleportation, or an incompatible post-occlusion relation."
+    },
+    {
+      "id": "catastrophic_structural_failure",
+      "trigger": {
+        "state": "DEFECT",
+        "any_question_ids": ["A04", "A05", "A06", "A07", "A08", "A09", "A10"]
+      },
+      "axis_caps": {"A": 20},
+      "overall_cap": 50,
+      "reason_zh": "手腕断裂、额外或缺失手、手臂拓扑突变、手部坍缩或物体消失/复制。",
+      "reason_en": "A wrist disconnects, a hand is added or missing, arm topology changes, a hand collapses, or the object disappears/duplicates."
+    }
+  ],
+  "reporting": {
+    "per_video_required": [
+      "all_question_states",
+      "timestamped_evidence_for_defect_and_uncertain",
+      "axis_raw_scores",
+      "axis_final_scores",
+      "overall_raw",
+      "overall_final",
+      "triggered_caps",
+      "critical_defect_count",
+      "uncertain_count",
+      "not_applicable_count"
+    ],
+    "dataset_required": [
+      "mean_and_median_overall_final",
+      "p10_overall_final",
+      "per_axis_mean_and_median",
+      "perfect_score_rate",
+      "critical_failure_rate",
+      "uncertain_rate",
+      "per_question_defect_rate",
+      "bootstrap_95_percent_confidence_intervals",
+      "method_paired_differences_on_identical_prompts"
+    ],
+    "audit_rule_zh": "人工复核全部满分视频、全部触发关键缺陷上限的视频，以及不同裁判结论不一致的视频。",
+    "audit_rule_en": "Human-audit every perfect-score video, every video triggering a critical cap, and every video on which judges disagree."
+  }
+}

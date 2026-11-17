@@ -1,0 +1,295 @@
+{
+  "dataset": "InteractVerse",
+  "percentage_basis": "All percentages are shares of the entire dataset.",
+  "categories": [
+    {
+      "id": "apparel-footwear",
+      "name": "Apparel & Footwear",
+      "share_pct": 22,
+      "subcategories": [
+        {
+          "name": "Tops",
+          "share_pct": 4.5
+        },
+        {
+          "name": "Bottoms, Dresses & Skirts",
+          "share_pct": 4.0
+        },
+        {
+          "name": "Underwear, Loungewear & Hosiery",
+          "share_pct": 3.0
+        },
+        {
+          "name": "Footwear",
+          "share_pct": 5.0
+        },
+        {
+          "name": "Children's Apparel & Footwear",
+          "share_pct": 2.0
+        },
+        {
+          "name": "Performance & Sportswear",
+          "share_pct": 3.5
+        }
+      ]
+    },
+    {
+      "id": "food-beverages",
+      "name": "Food & Beverages",
+      "share_pct": 14,
+      "subcategories": [
+        {
+          "name": "Packaged Snacks",
+          "share_pct": 3.0
+        },
+        {
+          "name": "Fresh Food",
+          "share_pct": 2.5
+        },
+        {
+          "name": "Convenience & Dried Foods",
+          "share_pct": 2.0
+        },
+        {
+          "name": "Grains, Oils, Condiments & Baking Ingredients",
+          "share_pct": 3.0
+        },
+        {
+          "name": "Tea, Coffee & Beverages",
+          "share_pct": 2.5
+        },
+        {
+          "name": "Alcoholic Beverages",
+          "share_pct": 1.0
+        }
+      ]
+    },
+    {
+      "id": "home-kitchen",
+      "name": "Home & Kitchen Products",
+      "share_pct": 12,
+      "subcategories": [
+        {
+          "name": "Cookware & Cooking Utensils",
+          "share_pct": 2.5
+        },
+        {
+          "name": "Tableware & Teaware",
+          "share_pct": 2.0
+        },
+        {
+          "name": "Storage & Cleaning Supplies",
+          "share_pct": 2.5
+        },
+        {
+          "name": "Home Textiles",
+          "share_pct": 2.0
+        },
+        {
+          "name": "Furniture & Home Décor",
+          "share_pct": 1.5
+        },
+        {
+          "name": "Bathroom Fixtures, Lighting & Home Improvement Components",
+          "share_pct": 1.5
+        }
+      ]
+    },
+    {
+      "id": "beauty-personal-care",
+      "name": "Beauty & Personal Care",
+      "share_pct": 10,
+      "subcategories": [
+        {
+          "name": "Skin Care",
+          "share_pct": 3.0
+        },
+        {
+          "name": "Makeup & Fragrances",
+          "share_pct": 2.5
+        },
+        {
+          "name": "Hair, Body & Oral Care",
+          "share_pct": 2.0
+        },
+        {
+          "name": "Beauty Tools & Personal Care Appliances",
+          "share_pct": 2.5
+        }
+      ]
+    },
+    {
+      "id": "electronics-appliances",
+      "name": "Electronics & Home Appliances",
+      "share_pct": 9,
+      "subcategories": [
+        {
+          "name": "Mobile Phones & Wearable Devices",
+          "share_pct": 2.0
+        },
+        {
+          "name": "Photography, Audio/Video & Smart Devices",
+          "share_pct": 1.5
+        },
+        {
+          "name": "Computers & Office Equipment",
+          "share_pct": 1.5
+        },
+        {
+          "name": "Kitchen Appliances",
+          "share_pct": 2.0
+        },
+        {
+          "name": "Household & Personal Care Appliances",
+          "share_pct": 2.0
+        }
+      ]
+    },
+    {
+      "id": "healthcare-maternity-baby",
+      "name": "Healthcare, Maternity & Baby Products",
+      "share_pct": 8,
+      "subcategories": [
+        {
+          "name": "Dietary Supplements",
+          "share_pct": 2.5
+        },
+        {
+          "name": "Medicines & Medical Devices",
+          "share_pct": 2.5
+        },
+        {
+          "name": "Infant Food & Feeding Supplies",
+          "share_pct": 1.0
+        },
+        {
+          "name": "Diapers & Hygiene Products",
+          "share_pct": 1.0
+        },
+        {
+          "name": "Maternity & Nursery Bedding and Furnishings",
+          "share_pct": 1.0
+        }
+      ]
+    },
+    {
+      "id": "sports-fitness-outdoors",
+      "name": "Sports, Fitness & Outdoors",
+      "share_pct": 7,
+      "subcategories": [
+        {
+          "name": "Fitness & Yoga Equipment",
+          "share_pct": 2.0
+        },
+        {
+          "name": "Ball Sports & Protective Gear",
+          "share_pct": 1.5
+        },
+        {
+          "name": "Camping & Hiking Equipment",
+          "share_pct": 1.5
+        },
+        {
+          "name": "Fishing & Cycling Equipment",
+          "share_pct": 1.0
+        },
+        {
+          "name": "Other Outdoor Equipment",
+          "share_pct": 1.0
+        }
+      ]
+    },
+    {
+      "id": "bags-accessories-jewelry",
+      "name": "Bags, Accessories & Jewelry",
+      "share_pct": 7,
+      "subcategories": [
+        {
+          "name": "Bags & Luggage",
+          "share_pct": 2.0
+        },
+        {
+          "name": "Fashion Accessories",
+          "share_pct": 1.5
+        },
+        {
+          "name": "Watches & Eyewear",
+          "share_pct": 1.0
+        },
+        {
+          "name": "Jewelry",
+          "share_pct": 1.5
+        },
+        {
+          "name": "Collectibles & Handicrafts",
+          "share_pct": 1.0
+        }
+      ]
+    },
+    {
+      "id": "books-education-toys-music",
+      "name": "Books, Education, Toys & Musical Instruments",
+      "share_pct": 5,
+      "subcategories": [
+        {
+          "name": "Books, Stationery & Office Supplies",
+          "share_pct": 1.5
+        },
+        {
+          "name": "Toys & Early Learning Products",
+          "share_pct": 1.5
+        },
+        {
+          "name": "Musical Instruments & Accessories",
+          "share_pct": 1.0
+        },
+        {
+          "name": "Art Supplies, Model Kits & Craft Materials",
+          "share_pct": 1.0
+        }
+      ]
+    },
+    {
+      "id": "pet-garden",
+      "name": "Pet & Garden Supplies",
+      "share_pct": 3,
+      "subcategories": [
+        {
+          "name": "Pet Food & Care Products",
+          "share_pct": 1.5
+        },
+        {
+          "name": "Flowers & Live Plants",
+          "share_pct": 0.8
+        },
+        {
+          "name": "Gardening Tools & Agricultural Supplies",
+          "share_pct": 0.7
+        }
+      ]
+    },
+    {
+      "id": "tools-home-improvement-automotive",
+      "name": "Tools, Home Improvement & Automotive Products",
+      "share_pct": 3,
+      "subcategories": [
+        {
+          "name": "Hardware & Hand Tools",
+          "share_pct": 1.0
+        },
+        {
+          "name": "Electronic & Electrical Components",
+          "share_pct": 0.7
+        },
+        {
+          "name": "Building Materials & Repair Supplies",
+          "share_pct": 0.7
+        },
+        {
+          "name": "Automotive & Agricultural Machinery Supplies",
+          "share_pct": 0.6
+        }
+      ]
+    }
+  ]
+}
